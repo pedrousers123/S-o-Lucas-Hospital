@@ -1,0 +1,161 @@
+<div class="login-page">
+
+  <div class="login-container">
+
+    <!-- LADO ESQUERDO -->
+    <div class="login-info">
+
+      <div class="brand">
+        <div class="logo">+</div>
+
+        <div>
+          <h1>São Lucas</h1>
+          <span>Gestão Hospitalar</span>
+        </div>
+      </div>
+
+      <div class="info-content">
+
+        <h2>
+          Cuidando da gestão para você cuidar das pessoas.
+        </h2>
+
+        <p>
+          Organize pacientes, consultas, médicos,
+          internações e exames em um só lugar.
+        </p>
+
+      </div>
+
+      <div class="info-footer">
+        <span>✓ Gestão simples</span>
+        <span>✓ Dados organizados</span>
+        <span>✓ Acesso seguro</span>
+      </div>
+
+    </div>
+
+
+    <!-- LADO DIREITO -->
+    <div class="login-card">
+
+      <div class="welcome">
+
+        <h2>Bem-vindo!</h2>
+
+        <p>
+          Entre na sua conta para acessar o sistema.
+        </p>
+
+      </div>
+
+
+      <form (ngSubmit)="entrar()">
+
+        <!-- E-MAIL -->
+        <div class="form-group">
+
+          <label for="email">
+            E-mail
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="seuemail@exemplo.com"
+            required
+          >
+
+        </div>
+
+
+        <!-- SENHA -->
+        <div class="form-group">
+
+          <div class="password-label">
+
+            <label for="senha">
+              Senha
+            </label>
+
+            <span class="forgot-password">
+              Esqueci minha senha
+            </span>
+
+          </div>
+
+
+          <div class="password-input">
+
+            <input
+              id="senha"
+              [type]="mostrarSenha ? 'text' : 'password'"
+              [(ngModel)]="senha"
+              name="senha"
+              placeholder="Digite sua senha"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              (click)="alternarSenha()"
+            >
+              {{ mostrarSenha ? 'Ocultar' : 'Mostrar' }}
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ERRO -->
+        @if (erro) {
+
+          <div class="error-message">
+            ⚠ {{ erro }}
+          </div>
+
+        }
+
+
+        <!-- ENTRAR -->
+        <button
+          type="submit"
+          class="login-button"
+        >
+          Entrar
+        </button>
+
+      </form>
+
+
+      <!-- CRIAR CONTA -->
+      <div class="register">
+
+        <span>
+          Ainda não possui uma conta?
+        </span>
+
+        <button
+          type="button"
+          class="register-button"
+          (click)="irParaCadastro()"
+        >
+          Criar uma conta
+        </button>
+
+      </div>
+
+
+      <div class="security">
+        🔒 Ambiente seguro
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
