@@ -7,85 +7,145 @@
       <div class="logo-icon">+</div>
 
       <div>
-        <h1>São Lucas</h1>
-        <span>Gestão Hospitalar</span>
+        <strong>São Lucas</strong>
+        <small>Hospital</small>
       </div>
     </div>
 
-    <nav>
+    <div class="menu-title">
+      PRINCIPAL
+    </div>
 
-      <a class="active">
-        <span>▦</span>
+    <nav class="menu">
+
+      <button
+        type="button"
+        class="menu-button active"
+      >
+        <span class="icon">▦</span>
         <span>Dashboard</span>
-      </a>
+      </button>
 
-      <a>
-        <span>👥</span>
+      <button
+        type="button"
+        class="menu-button"
+        (click)="abrirPacientes()"
+      >
+        <span class="icon">👥</span>
         <span>Pacientes</span>
-      </a>
+      </button>
 
-      <a>
-        <span>👨‍⚕️</span>
+      <button
+        type="button"
+        class="menu-button"
+        (click)="abrirMedicos()"
+      >
+        <span class="icon">👨‍⚕️</span>
         <span>Médicos</span>
-      </a>
+      </button>
 
-      <a>
-        <span>📅</span>
+      <button
+        type="button"
+        class="menu-button"
+        (click)="abrirConsultas()"
+      >
+        <span class="icon">📅</span>
         <span>Consultas</span>
-      </a>
+      </button>
 
-      <a>
-        <span>🏥</span>
+      <button
+        type="button"
+        class="menu-button"
+      >
+        <span class="icon">🏥</span>
         <span>Internações</span>
-      </a>
+      </button>
 
-      <a>
-        <span>🧪</span>
+      <button
+        type="button"
+        class="menu-button"
+      >
+        <span class="icon">🧪</span>
         <span>Exames</span>
-      </a>
+      </button>
 
     </nav>
 
+
+    <div class="menu-title sistema">
+      SISTEMA
+    </div>
+
+    <nav class="menu">
+
+      <button
+        type="button"
+        class="menu-button"
+      >
+        <span class="icon">⚙</span>
+        <span>Configurações</span>
+      </button>
+
+    </nav>
+
+
     <div class="sidebar-bottom">
 
-      <a>
-        <span>⚙️</span>
-        <span>Configurações</span>
-      </a>
-
-      <a class="logout">
+      <button
+        type="button"
+        class="logout"
+        (click)="voltarLogin()"
+      >
         <span>⇥</span>
         <span>Sair</span>
-      </a>
+      </button>
 
     </div>
 
   </aside>
 
 
-  <!-- CONTEÚDO PRINCIPAL -->
-  <main class="main-content">
+  <!-- ÁREA PRINCIPAL -->
+  <main class="main">
 
-    <!-- CABEÇALHO -->
+    <!-- TOPO -->
+
     <header class="topbar">
 
       <div>
-        <h2>Dashboard</h2>
+        <h1>Dashboard</h1>
 
         <p>
           Visão geral do Hospital São Lucas
         </p>
       </div>
 
-      <div class="user">
 
-        <div class="user-icon">
-          {{ nomeUsuario.charAt(0) }}
+      <div class="user-area">
+
+        <div class="notification">
+          🔔
+          <span>3</span>
         </div>
 
-        <div>
-          <strong>{{ nomeUsuario }}</strong>
-          <span>Administrador</span>
+        <div class="user">
+
+          <div class="avatar">
+            A
+          </div>
+
+          <div class="user-info">
+
+            <strong>
+              {{ nomeUsuario }}
+            </strong>
+
+            <small>
+              Administrador
+            </small>
+
+          </div>
+
         </div>
 
       </div>
@@ -93,240 +153,317 @@
     </header>
 
 
-    <!-- BOAS-VINDAS -->
-    <section class="welcome">
+    <!-- CONTEÚDO -->
 
-      <h1>
-        Olá, {{ nomeUsuario }}! 👋
-      </h1>
+    <section class="content">
 
-      <p>
-        Confira os principais indicadores do hospital.
-      </p>
-
-    </section>
-
-
-    <!-- INDICADORES -->
-    <section class="cards">
-
-      <div class="card">
-
-        <div class="card-icon blue">
-          👥
-        </div>
+      <div class="welcome">
 
         <div>
-          <span>Pacientes</span>
 
-          <strong>
+          <h2>
+            Olá, {{ nomeUsuario }} 👋
+          </h2>
+
+          <p>
+            Aqui está o resumo do hospital hoje.
+          </p>
+
+        </div>
+
+        <div class="date">
+          📅 Hoje
+        </div>
+
+      </div>
+
+
+      <!-- INDICADORES -->
+
+      <div class="cards">
+
+        <div class="card">
+
+          <div class="card-top">
+
+            <div class="card-icon blue">
+              👥
+            </div>
+
+            <span class="card-status">
+              +8%
+            </span>
+
+          </div>
+
+          <span class="card-label">
+            Pacientes
+          </span>
+
+          <strong class="card-number">
             {{ pacientes }}
           </strong>
 
           <small>
             pacientes cadastrados
           </small>
+
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+          <div class="card-top">
 
-        <div class="card-icon green">
-          👨‍⚕️
-        </div>
+            <div class="card-icon green">
+              👨‍⚕️
+            </div>
 
-        <div>
-          <span>Médicos</span>
+            <span class="card-status">
+              Ativos
+            </span>
 
-          <strong>
+          </div>
+
+          <span class="card-label">
+            Médicos
+          </span>
+
+          <strong class="card-number">
             {{ medicos }}
           </strong>
 
           <small>
-            profissionais
+            profissionais cadastrados
           </small>
+
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+          <div class="card-top">
 
-        <div class="card-icon orange">
-          📅
-        </div>
+            <div class="card-icon orange">
+              📅
+            </div>
 
-        <div>
-          <span>Consultas hoje</span>
+            <span class="card-status">
+              Hoje
+            </span>
 
-          <strong>
+          </div>
+
+          <span class="card-label">
+            Consultas
+          </span>
+
+          <strong class="card-number">
             {{ consultasHoje }}
           </strong>
 
           <small>
-            consultas agendadas
+            atendimentos agendados
           </small>
+
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="card">
+          <div class="card-top">
 
-        <div class="card-icon red">
-          🏥
-        </div>
+            <div class="card-icon purple">
+              🏥
+            </div>
 
-        <div>
-          <span>Internações</span>
+            <span class="card-status">
+              72%
+            </span>
 
-          <strong>
+          </div>
+
+          <span class="card-label">
+            Internações
+          </span>
+
+          <strong class="card-number">
             {{ internacoes }}
           </strong>
 
           <small>
             pacientes internados
           </small>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ÁREA INFERIOR -->
-    <section class="dashboard-grid">
-
-
-      <!-- PRÓXIMAS CONSULTAS -->
-      <div class="panel">
-
-        <div class="panel-header">
-
-          <div>
-            <h3>Próximas consultas</h3>
-
-            <p>
-              Consultas agendadas para hoje
-            </p>
-          </div>
-
-          <button>
-            Ver todas
-          </button>
-
-        </div>
-
-
-        <div class="appointment">
-
-          <div class="patient-avatar">
-            MS
-          </div>
-
-          <div class="appointment-info">
-
-            <strong>
-              Maria Silva
-            </strong>
-
-            <span>
-              Dr. Carlos Oliveira · Cardiologia
-            </span>
-
-          </div>
-
-          <time>
-            09:00
-          </time>
-
-        </div>
-
-
-        <div class="appointment">
-
-          <div class="patient-avatar">
-            JS
-          </div>
-
-          <div class="appointment-info">
-
-            <strong>
-              João Santos
-            </strong>
-
-            <span>
-              Dra. Ana Costa · Clínica Geral
-            </span>
-
-          </div>
-
-          <time>
-            10:30
-          </time>
-
-        </div>
-
-
-        <div class="appointment">
-
-          <div class="patient-avatar">
-            AS
-          </div>
-
-          <div class="appointment-info">
-
-            <strong>
-              Ana Souza
-            </strong>
-
-            <span>
-              Dr. Pedro Lima · Ortopedia
-            </span>
-
-          </div>
-
-          <time>
-            14:00
-          </time>
 
         </div>
 
       </div>
 
 
-      <!-- RESUMO -->
-      <div class="panel">
+      <!-- PARTE INFERIOR -->
 
-        <div class="panel-header">
+      <div class="dashboard-grid">
 
-          <div>
-            <h3>Resumo do hospital</h3>
 
-            <p>
-              Indicadores de atendimento
-            </p>
+        <!-- CONSULTAS -->
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h3>
+                Próximas consultas
+              </h3>
+
+              <p>
+                Atendimentos programados para hoje
+              </p>
+
+            </div>
+
+            <button
+              class="see-all"
+              (click)="abrirConsultas()"
+            >
+              Ver agenda →
+            </button>
+
+          </div>
+
+
+          <div class="appointment">
+
+            <div class="appointment-time">
+              <strong>09:00</strong>
+              <small>Hoje</small>
+            </div>
+
+            <div class="patient-avatar">
+              MS
+            </div>
+
+            <div class="appointment-info">
+
+              <strong>
+                Maria Silva
+              </strong>
+
+              <small>
+                Dr. Carlos Oliveira · Cardiologia
+              </small>
+
+            </div>
+
+            <span class="badge blue-badge">
+              Confirmada
+            </span>
+
+          </div>
+
+
+          <div class="appointment">
+
+            <div class="appointment-time">
+              <strong>10:30</strong>
+              <small>Hoje</small>
+            </div>
+
+            <div class="patient-avatar green-avatar">
+              JS
+            </div>
+
+            <div class="appointment-info">
+
+              <strong>
+                João Santos
+              </strong>
+
+              <small>
+                Dra. Ana Costa · Clínica Geral
+              </small>
+
+            </div>
+
+            <span class="badge orange-badge">
+              Aguardando
+            </span>
+
+          </div>
+
+
+          <div class="appointment">
+
+            <div class="appointment-time">
+              <strong>14:00</strong>
+              <small>Hoje</small>
+            </div>
+
+            <div class="patient-avatar purple-avatar">
+              AC
+            </div>
+
+            <div class="appointment-info">
+
+              <strong>
+                Ana Carvalho
+              </strong>
+
+              <small>
+                Dr. Pedro Lima · Ortopedia
+              </small>
+
+            </div>
+
+            <span class="badge blue-badge">
+              Confirmada
+            </span>
+
           </div>
 
         </div>
 
 
-        <!-- LEITOS -->
-        <div class="status">
+        <!-- RESUMO -->
 
-          <div class="status-row">
+        <div class="panel resumo">
 
-            <span>
-              Leitos ocupados
-            </span>
+          <div class="panel-header">
 
-            <strong>
+            <div>
+
+              <h3>
+                Ocupação hospitalar
+              </h3>
+
+              <p>
+                Situação atual dos leitos
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="occupancy">
+
+            <div class="occupancy-number">
               72%
-            </strong>
+            </div>
+
+            <div class="occupancy-text">
+              <strong>
+                Ocupação total
+              </strong>
+
+              <small>
+                86 de 120 leitos ocupados
+              </small>
+            </div>
 
           </div>
+
 
           <div class="progress">
 
@@ -334,55 +471,101 @@
 
           </div>
 
-        </div>
 
+          <div class="bed-row">
 
-        <!-- EXAMES -->
-        <div class="status">
-
-          <div class="status-row">
-
-            <span>
-              Exames realizados
-            </span>
+            <div>
+              <span class="dot available"></span>
+              Disponíveis
+            </div>
 
             <strong>
-              64%
+              34
             </strong>
 
           </div>
 
-          <div class="progress">
 
-            <div class="progress-bar progress-exams"></div>
+          <div class="bed-row">
 
-          </div>
-
-        </div>
-
-
-        <!-- CONSULTAS -->
-        <div class="status">
-
-          <div class="status-row">
-
-            <span>
-              Consultas concluídas
-            </span>
+            <div>
+              <span class="dot occupied"></span>
+              Ocupados
+            </div>
 
             <strong>
-              81%
+              86
             </strong>
 
           </div>
 
-          <div class="progress">
 
-            <div class="progress-bar progress-consultas"></div>
+          <div class="bed-row">
+
+            <div>
+              <span class="dot maintenance"></span>
+              Manutenção
+            </div>
+
+            <strong>
+              5
+            </strong>
 
           </div>
 
         </div>
+
+      </div>
+
+
+      <!-- ATALHOS -->
+
+      <div class="quick-title">
+        Acesso rápido
+      </div>
+
+      <div class="quick-actions">
+
+        <button
+          (click)="abrirPacientes()"
+        >
+          <span>👥</span>
+          <div>
+            <strong>Novo paciente</strong>
+            <small>Cadastrar paciente</small>
+          </div>
+        </button>
+
+
+        <button
+          (click)="abrirMedicos()"
+        >
+          <span>👨‍⚕️</span>
+          <div>
+            <strong>Novo médico</strong>
+            <small>Cadastrar profissional</small>
+          </div>
+        </button>
+
+
+        <button
+          (click)="abrirConsultas()"
+        >
+          <span>📅</span>
+          <div>
+            <strong>Nova consulta</strong>
+            <small>Agendar atendimento</small>
+          </div>
+        </button>
+
+
+        <button>
+          <span>🧪</span>
+          <div>
+            <strong>Novo exame</strong>
+            <small>Solicitar exame</small>
+          </div>
+        </button>
 
       </div>
 

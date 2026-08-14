@@ -3,350 +3,334 @@
 }
 
 .dashboard {
-  min-height: 100vh;
   display: flex;
-  background: #f6f8fb;
+  min-height: 100vh;
+  background: #f5f7fa;
   color: #26384a;
 }
 
-
-/* =========================
-   MENU
-========================= */
+/* SIDEBAR */
 
 .sidebar {
-  width: 220px;
-  min-height: 100vh;
-  padding: 22px 12px;
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  border-right: 1px solid #e8edf2;
+  width: 200px;
+  min-width: 200px;
+  padding: 15px 10px;
+  background: #fff;
+  border-right: 1px solid #e5ebef;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 4px 10px 25px;
+  gap: 8px;
+  padding: 5px 8px 18px;
 }
 
 .logo-icon {
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
+  border-radius: 7px;
   background: #1769aa;
   color: white;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: bold;
 }
 
-.logo h1 {
-  margin: 0;
+.logo strong {
+  display: block;
   color: #173b57;
-  font-size: 18px;
-}
-
-.logo span {
-  color: #8493a3;
-  font-size: 9px;
-}
-
-
-/* =========================
-   NAVEGAÇÃO
-========================= */
-
-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-nav a,
-.sidebar-bottom a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 7px;
-  color: #708090;
   font-size: 13px;
-  text-decoration: none;
-  cursor: pointer;
 }
 
-nav a span {
-  width: 20px;
-  text-align: center;
+.logo small {
+  color: #8b99a6;
+  font-size: 8px;
 }
 
-nav a:hover {
-  background: #f1f7fb;
-  color: #1769aa;
+.menu-title {
+  padding: 8px;
+  color: #a0acb7;
+  font-size: 8px;
+  font-weight: bold;
 }
 
-nav a.active {
-  background: #eaf4fa;
-  color: #1769aa;
-  font-weight: 600;
-}
-
-
-/* =========================
-   PARTE INFERIOR DO MENU
-========================= */
-
-.sidebar-bottom {
-  margin-top: auto;
+.menu {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
-.sidebar-bottom a:hover {
-  background: #f5f7f9;
-}
-
-.sidebar-bottom .logout {
-  color: #c94b4b;
-}
-
-
-/* =========================
-   CONTEÚDO
-========================= */
-
-.main-content {
-  flex: 1;
-  min-width: 0;
-  padding: 24px 28px;
-}
-
-
-/* =========================
-   TOPO
-========================= */
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #e8edf2;
-}
-
-.topbar h2 {
-  margin: 0;
-  color: #173b57;
-  font-size: 22px;
-}
-
-.topbar p {
-  margin: 3px 0 0;
-  color: #8493a3;
-  font-size: 12px;
-}
-
-.user {
+.menu-button {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 9px;
+  padding: 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #718190;
+  font-size: 10px;
+  text-align: left;
+  cursor: pointer;
 }
 
-.user-icon {
-  width: 36px;
-  height: 36px;
+.menu-button:hover,
+.menu-button.active {
+  background: #eaf4fa;
+  color: #1769aa;
+}
+
+.menu-button .icon {
+  width: 18px;
+  text-align: center;
+}
+
+.sidebar-bottom {
+  margin-top: 30px;
+  border-top: 1px solid #edf1f4;
+  padding-top: 10px;
+}
+
+.logout {
+  width: 100%;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: #8997a4;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* MAIN */
+
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: white;
+  border-bottom: 1px solid #e5ebef;
+}
+
+.topbar h1 {
+  margin: 0;
+  color: #173b57;
+  font-size: 17px;
+}
+
+.topbar p {
+  margin: 2px 0;
+  color: #91a0ad;
+  font-size: 8px;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #1769aa;
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.user strong {
-  display: block;
-  color: #31485c;
-  font-size: 12px;
-}
-
-.user span {
-  color: #8a98a6;
-  font-size: 10px;
-}
-
-
-/* =========================
-   BOAS-VINDAS
-========================= */
-
-.welcome {
-  margin: 22px 0 18px;
-}
-
-.welcome h1 {
-  margin: 0 0 4px;
-  color: #173b57;
-  font-size: 21px;
-}
-
-.welcome p {
-  margin: 0;
-  color: #8493a3;
-  font-size: 12px;
-}
-
-
-/* =========================
-   CARDS
-========================= */
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-}
-
-.card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  background: #ffffff;
-  border: 1px solid #e9eef2;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(30, 60, 90, 0.04);
-}
-
-.card-icon {
-  width: 38px;
-  height: 38px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9px;
-  font-size: 17px;
-}
-
-.card-icon.blue {
   background: #eaf4fa;
-}
-
-.card-icon.green {
-  background: #eaf7f0;
-}
-
-.card-icon.orange {
-  background: #fff5e8;
-}
-
-.card-icon.red {
-  background: #fff0f0;
-}
-
-.card span {
-  display: block;
-  color: #8493a3;
+  color: #1769aa;
   font-size: 10px;
+  font-weight: bold;
 }
 
-.card strong {
+.user-info strong {
   display: block;
-  margin: 2px 0;
-  color: #173b57;
-  font-size: 21px;
-}
-
-.card small {
-  color: #a0acb7;
   font-size: 9px;
 }
 
-
-/* =========================
-   PAINÉIS INFERIORES
-========================= */
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 1.45fr 1fr;
-  gap: 14px;
-  margin-top: 14px;
+.user-info small {
+  color: #99a5b0;
+  font-size: 7px;
 }
 
-.panel {
-  padding: 18px;
-  background: #ffffff;
-  border: 1px solid #e9eef2;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(30, 60, 90, 0.03);
+/* CONTENT */
+
+.content {
+  padding: 18px 22px;
 }
 
-.panel-header {
+.welcome {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 14px;
 }
 
-.panel-header h3 {
-  margin: 0 0 3px;
+.welcome h2 {
+  margin: 0;
   color: #173b57;
   font-size: 14px;
 }
 
-.panel-header p {
-  margin: 0;
-  color: #8a98a6;
-  font-size: 10px;
+.welcome p {
+  margin: 3px 0;
+  color: #8b99a6;
+  font-size: 8px;
 }
 
-.panel-header button {
+.date {
   padding: 6px 9px;
-  border: 1px solid #dce5eb;
+  border: 1px solid #e2e9ee;
   border-radius: 6px;
   background: white;
+  color: #718190;
+  font-size: 8px;
+}
+
+/* CARDS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.card {
+  padding: 12px;
+  background: white;
+  border: 1px solid #e8edf2;
+  border-radius: 8px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.card-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: #eaf4fa;
+  font-size: 12px;
+}
+
+.card-status {
+  color: #718190;
+  font-size: 7px;
+}
+
+.card-label {
+  display: block;
+  color: #8997a4;
+  font-size: 8px;
+}
+
+.card-number {
+  display: block;
+  color: #173b57;
+  font-size: 18px;
+}
+
+.card small {
+  color: #a0aab3;
+  font-size: 7px;
+}
+
+/* PAINÉIS */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 10px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #e8edf2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.panel-header h3 {
+  margin: 0;
+  color: #344b5f;
+  font-size: 11px;
+}
+
+.panel-header p {
+  margin: 2px 0;
+  color: #9aa6b1;
+  font-size: 7px;
+}
+
+.see-all {
+  border: 0;
+  background: none;
   color: #1769aa;
-  font-size: 10px;
+  font-size: 8px;
   cursor: pointer;
 }
 
-
-/* =========================
-   CONSULTAS
-========================= */
+/* CONSULTAS */
 
 .appointment {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 11px 0;
-  border-bottom: 1px solid #edf1f4;
+  gap: 9px;
+  padding: 9px 12px;
+  border-bottom: 1px solid #f0f3f5;
 }
 
-.appointment:last-child {
-  border-bottom: none;
+.appointment-time {
+  width: 35px;
+  text-align: center;
+}
+
+.appointment-time strong {
+  color: #1769aa;
+  font-size: 9px;
+}
+
+.appointment-time small {
+  display: block;
+  color: #a0abb4;
+  font-size: 6px;
 }
 
 .patient-avatar {
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
+  width: 27px;
+  height: 27px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   background: #eaf4fa;
   color: #1769aa;
-  font-size: 9px;
-  font-weight: 600;
+  font-size: 7px;
+  font-weight: bold;
 }
 
 .appointment-info {
@@ -355,77 +339,115 @@ nav a.active {
 
 .appointment-info strong {
   display: block;
-  color: #31485c;
-  font-size: 11px;
+  color: #344b5f;
+  font-size: 8px;
 }
 
-.appointment-info span {
-  display: block;
-  margin-top: 2px;
-  color: #8997a5;
-  font-size: 9px;
+.appointment-info small {
+  color: #9aa6b1;
+  font-size: 6px;
 }
 
-.appointment time {
+.badge {
+  padding: 4px 6px;
+  border-radius: 10px;
+  background: #eaf4fa;
   color: #1769aa;
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 6px;
 }
 
+/* OCUPAÇÃO */
 
-/* =========================
-   STATUS
-========================= */
-
-.status {
-  margin-bottom: 19px;
-}
-
-.status:last-child {
-  margin-bottom: 0;
-}
-
-.status-row {
+.occupancy {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-  color: #718090;
-  font-size: 10px;
+  align-items: center;
+  gap: 10px;
+  padding: 13px;
 }
 
-.status-row strong {
-  color: #31485c;
+.occupancy-number {
+  color: #1769aa;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.occupancy-text strong {
+  display: block;
+  font-size: 8px;
+}
+
+.occupancy-text small {
+  color: #9aa6b1;
+  font-size: 6px;
 }
 
 .progress {
-  width: 100%;
-  height: 6px;
-  overflow: hidden;
-  border-radius: 10px;
+  height: 5px;
+  margin: 0 13px 10px;
+  border-radius: 5px;
   background: #edf1f4;
 }
 
 .progress-bar {
   width: 72%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   background: #1769aa;
 }
 
-.progress-exams {
-  width: 64%;
+.bed-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 13px;
+  border-top: 1px solid #f0f3f5;
+  font-size: 7px;
 }
 
-.progress-consultas {
-  width: 81%;
+/* ACESSO RÁPIDO */
+
+.quick-title {
+  margin: 15px 0 7px;
+  color: #344b5f;
+  font-size: 10px;
+  font-weight: bold;
 }
 
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
 
-/* =========================
-   TABLET
-========================= */
+.quick-actions button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid #e8edf2;
+  border-radius: 7px;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+}
 
-@media (max-width: 1050px) {
+.quick-actions button > span {
+  font-size: 12px;
+}
+
+.quick-actions strong {
+  display: block;
+  color: #344b5f;
+  font-size: 8px;
+}
+
+.quick-actions small {
+  color: #9aa6b1;
+  font-size: 6px;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
 
   .cards {
     grid-template-columns: repeat(2, 1fr);
@@ -434,83 +456,30 @@ nav a.active {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-
-/* =========================
-   CELULAR
-========================= */
-
-@media (max-width: 750px) {
+@media (max-width: 650px) {
 
   .sidebar {
-    width: 65px;
-    padding: 18px 8px;
+    width: 55px;
+    min-width: 55px;
   }
 
-  .logo {
-    justify-content: center;
-    padding: 3px 0 22px;
-  }
-
-  .logo > div:last-child {
+  .logo > div:last-child,
+  .menu-title,
+  .menu-button span:last-child {
     display: none;
   }
 
-  nav a,
-  .sidebar-bottom a {
+  .menu-button {
     justify-content: center;
   }
 
-  nav a {
-    font-size: 0;
-  }
-
-  nav a span {
-    font-size: 16px;
-  }
-
-  .sidebar-bottom a {
-    font-size: 0;
-  }
-
-  .sidebar-bottom .logout {
-    font-size: 16px;
-  }
-
-  .main-content {
-    padding: 18px;
-  }
-}
-
-
-/* =========================
-   CELULAR PEQUENO
-========================= */
-
-@media (max-width: 520px) {
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .topbar {
-    align-items: flex-start;
-  }
-
-  .user div:last-child {
-    display: none;
-  }
-
-  .welcome h1 {
-    font-size: 18px;
-  }
-
-  .main-content {
-    padding: 14px;
-  }
-
-  .panel {
+  .content {
     padding: 14px;
   }
 }

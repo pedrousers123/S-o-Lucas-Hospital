@@ -18,11 +18,20 @@ export class Dashboard {
 
   constructor(private router: Router) {}
 
-  abrirPacientes() {
+  abrirPacientes(): void {
     this.router.navigate(['/pacientes']);
   }
 
-  voltarLogin() {
+  abrirMedicos(): void {
+    this.router.navigate(['/medicos']);
+  }
+
+  abrirConsultas(): void {
+    this.router.navigate(['/consultas']);
+  }
+
+  voltarLogin(): void {
     this.router.navigate(['/login']);
   }
+
 }
