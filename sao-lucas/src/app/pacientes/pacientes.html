@@ -1,163 +1,176 @@
-<div class="pacientes-page">
+<div class="container py-4">
 
-  <header class="topo">
+  <!-- CABEÇALHO -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div class="titulo">
+    <div>
+      <h1 class="fw-bold mb-1">
+        <i class="bi bi-people text-primary"></i>
+        Pacientes
+      </h1>
 
-      <button
-        class="voltar"
-        (click)="voltarDashboard()"
-      >
-        ←
-      </button>
-
-      <div>
-        <h1>Pacientes</h1>
-
-        <p>
-          Gerenciamento dos pacientes do hospital
-        </p>
-      </div>
-
+      <p class="text-muted mb-0">
+        Cadastro e gerenciamento dos pacientes
+      </p>
     </div>
 
     <button
-      class="novo-button"
-      (click)="abrirFormulario()"
+      class="btn btn-outline-primary"
+      (click)="voltarDashboard()"
     >
-      + Novo paciente
+      <i class="bi bi-arrow-left"></i>
+      Dashboard
     </button>
 
-  </header>
+  </div>
 
 
-  @if (mensagem) {
+  <!-- BARRA DE BUSCA -->
+  <div class="card shadow-sm border-0 mb-4">
 
-    <div class="mensagem sucesso">
-      ✓ {{ mensagem }}
-    </div>
+    <div class="card-body">
 
-  }
+      <div class="row align-items-center g-3">
 
+        <div class="col-md-8">
 
-  <!-- FORMULÁRIO -->
+          <label class="form-label fw-semibold">
+            Buscar paciente
+          </label>
 
-  @if (mostrarFormulario) {
+          <div class="input-group">
 
-    <section class="form-card">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
 
-      <div class="form-header">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Digite o nome ou CPF"
+              [(ngModel)]="busca"
+            >
 
-        <div>
-          <h2>Novo paciente</h2>
+          </div>
 
-          <p>
-            Informe os dados do paciente.
-          </p>
         </div>
 
-        <button
-          class="fechar"
-          (click)="fecharFormulario()"
-        >
-          ×
-        </button>
+        <div class="col-md-4 text-md-end">
+
+          <label class="form-label d-none d-md-block">
+            &nbsp;
+          </label>
+
+          <button
+            class="btn btn-primary w-100"
+            (click)="abrirFormulario()"
+          >
+            <i class="bi bi-person-plus"></i>
+            Novo paciente
+          </button>
+
+        </div>
 
       </div>
 
+    </div>
 
-      @if (erro) {
-
-        <div class="mensagem erro">
-          ⚠ {{ erro }}
-        </div>
-
-      }
+  </div>
 
 
-      <form (ngSubmit)="salvarPaciente()">
+  <!-- FORMULÁRIO -->
+  @if (mostrarFormulario) {
 
-        <div class="form-grid">
+    <div class="card shadow-sm border-0 mb-4">
 
-          <div class="campo campo-grande">
+      <div class="card-header bg-primary text-white py-3">
 
-            <label>
-              Nome completo *
+        <h5 class="mb-0">
+          <i class="bi bi-person-plus"></i>
+          Cadastrar paciente
+        </h5>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="row g-3">
+
+          <div class="col-md-6">
+
+            <label class="form-label fw-semibold">
+              Nome completo
             </label>
 
             <input
               type="text"
+              class="form-control"
+              placeholder="Digite o nome"
               [(ngModel)]="nome"
-              name="nome"
-              placeholder="Digite o nome completo"
             >
 
           </div>
 
 
-          <div class="campo">
+          <div class="col-md-6">
 
-            <label>
-              CPF *
+            <label class="form-label fw-semibold">
+              CPF
             </label>
 
             <input
               type="text"
+              class="form-control"
+              placeholder="Digite o CPF"
               [(ngModel)]="cpf"
-              name="cpf"
-              placeholder="000.000.000-00"
             >
 
           </div>
 
 
-          <div class="campo">
+          <div class="col-md-6">
 
-            <label>
-              Telefone *
+            <label class="form-label fw-semibold">
+              Telefone
             </label>
 
             <input
               type="text"
+              class="form-control"
+              placeholder="Digite o telefone"
               [(ngModel)]="telefone"
-              name="telefone"
-              placeholder="(00) 00000-0000"
             >
 
           </div>
 
 
-          <div class="campo">
+          <div class="col-md-6">
 
-            <label>
-              Data de nascimento *
+            <label class="form-label fw-semibold">
+              Data de nascimento
             </label>
 
             <input
               type="date"
+              class="form-control"
               [(ngModel)]="nascimento"
-              name="nascimento"
             >
 
           </div>
 
 
-          <div class="campo">
+          <div class="col-md-6">
 
-            <label>
+            <label class="form-label fw-semibold">
               Convênio
             </label>
 
             <select
+              class="form-select"
               [(ngModel)]="convenio"
-              name="convenio"
             >
 
               <option value="">
-                Selecione
-              </option>
-
-              <option value="Particular">
                 Particular
               </option>
 
@@ -184,159 +197,189 @@
         </div>
 
 
-        <div class="form-actions">
+        @if (erro) {
+
+          <div class="alert alert-danger mt-3 mb-0">
+            <i class="bi bi-exclamation-triangle"></i>
+            {{ erro }}
+          </div>
+
+        }
+
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
 
           <button
-            type="button"
-            class="cancelar"
+            class="btn btn-outline-secondary"
             (click)="fecharFormulario()"
           >
             Cancelar
           </button>
 
           <button
-            type="submit"
-            class="salvar"
+            class="btn btn-primary"
+            (click)="salvarPaciente()"
           >
+            <i class="bi bi-check-lg"></i>
             Cadastrar paciente
           </button>
 
         </div>
 
-      </form>
+      </div>
 
-    </section>
+    </div>
+
+  }
+
+
+  <!-- MENSAGEM -->
+  @if (mensagem) {
+
+    <div class="alert alert-success">
+      <i class="bi bi-check-circle"></i>
+      {{ mensagem }}
+    </div>
 
   }
 
 
   <!-- LISTA -->
+  <div class="card shadow-sm border-0">
 
-  <section class="lista-card">
+    <div class="card-header bg-white py-3">
 
-    <div class="lista-header">
+      <div class="d-flex justify-content-between align-items-center">
 
-      <div>
-        <h2>Pacientes cadastrados</h2>
+        <div>
 
-        <span>
-          {{ pacientes.length }} paciente(s)
+          <h5 class="mb-1">
+            Pacientes cadastrados
+          </h5>
+
+          <small class="text-muted">
+            Pacientes registrados no hospital
+          </small>
+
+        </div>
+
+        <span class="badge bg-primary rounded-pill">
+          {{ pacientesFiltrados().length }}
         </span>
-      </div>
-
-
-      <div class="busca">
-
-        <span>⌕</span>
-
-        <input
-          type="text"
-          [(ngModel)]="busca"
-          placeholder="Buscar paciente ou CPF"
-        >
 
       </div>
 
     </div>
 
 
-    @if (pacientesFiltrados().length === 0) {
+    <div class="card-body">
 
-      <div class="vazio">
+      @if (pacientesFiltrados().length === 0) {
 
-        <div class="vazio-icon">
-          👥
-        </div>
+        <div class="text-center py-5">
 
-        <h3>
-          Nenhum paciente encontrado
-        </h3>
+          <i class="bi bi-person-x display-4 text-muted"></i>
 
-        <p>
-          Cadastre um paciente para começar.
-        </p>
-
-        <button
-          (click)="abrirFormulario()"
-        >
-          + Cadastrar paciente
-        </button>
-
-      </div>
-
-    } @else {
-
-      <div class="tabela">
-
-        <div class="tabela-header">
-
-          <span>Paciente</span>
-          <span>CPF</span>
-          <span>Telefone</span>
-          <span>Convênio</span>
-          <span>Ações</span>
+          <p class="text-muted mt-3 mb-0">
+            Nenhum paciente encontrado.
+          </p>
 
         </div>
 
+      }
 
-        @for (
-          paciente of pacientesFiltrados();
-          track paciente.id
-        ) {
 
-          <div class="tabela-linha">
+      @for (paciente of pacientesFiltrados(); track paciente.id) {
 
-            <div class="paciente-nome">
+        <div class="paciente-item border rounded p-3 mb-3">
 
-              <div class="avatar">
-                {{ paciente.nome.charAt(0).toUpperCase() }}
-              </div>
+          <div class="row align-items-center">
 
-              <div>
+            <div class="col-md-3">
 
-                <strong>
-                  {{ paciente.nome }}
-                </strong>
+              <small class="text-muted">
+                PACIENTE
+              </small>
 
-                <small>
-                  Nascimento: {{ paciente.nascimento }}
-                </small>
-
-              </div>
+              <h6 class="mb-0 mt-1">
+                <i class="bi bi-person-circle text-primary"></i>
+                {{ paciente.nome }}
+              </h6>
 
             </div>
 
 
-            <span>
-              {{ paciente.cpf }}
-            </span>
+            <div class="col-md-2">
+
+              <small class="text-muted">
+                CPF
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                {{ paciente.cpf }}
+              </h6>
+
+            </div>
 
 
-            <span>
-              {{ paciente.telefone }}
-            </span>
+            <div class="col-md-2">
+
+              <small class="text-muted">
+                TELEFONE
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                {{ paciente.telefone }}
+              </h6>
+
+            </div>
 
 
-            <span class="convenio">
-              {{ paciente.convenio }}
-            </span>
+            <div class="col-md-2">
+
+              <small class="text-muted">
+                NASCIMENTO
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                {{ paciente.nascimento }}
+              </h6>
+
+            </div>
 
 
-            <button
-              class="excluir"
-              (click)="excluirPaciente(paciente.id)"
-            >
-              Excluir
-            </button>
+            <div class="col-md-2">
+
+              <small class="text-muted">
+                CONVÊNIO
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                {{ paciente.convenio }}
+              </h6>
+
+            </div>
+
+
+            <div class="col-md-1 text-md-end mt-3 mt-md-0">
+
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="excluirPaciente(paciente.id)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+
+            </div>
 
           </div>
 
-        }
+        </div>
 
-      </div>
+      }
 
-    }
+    </div>
 
-  </section>
+  </div>
 
 </div>

@@ -53,11 +53,11 @@ export class Internacoes implements OnInit {
     'Maternidade'
   ];
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
     this.carregarDados();
   }
-
-  constructor(private router: Router) {}
 
   carregarDados() {
 

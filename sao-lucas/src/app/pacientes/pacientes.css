@@ -35,8 +35,21 @@
   color: #334155;
 }
 
+.input-group-text {
+  background: white;
+  color: #2563eb;
+}
+
 .btn {
   border-radius: 8px;
+}
+
+.badge {
+  font-size: 13px;
+}
+
+.alert {
+  border-radius: 10px;
 }
 
 @media (max-width: 768px) {
