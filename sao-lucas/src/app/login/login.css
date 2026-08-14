@@ -423,3 +423,39 @@
     gap: 8px;
   }
 }
+.register {
+  position: relative;
+  z-index: 1000;
+}
+
+.register-button {
+  position: relative;
+  z-index: 1001;
+
+  display: inline-block;
+
+  width: auto;
+  height: auto;
+
+  padding: 5px 8px;
+  margin: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #1769aa;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+}
+
+.register-button:hover {
+  color: #12578d;
+  text-decoration: underline;
+}

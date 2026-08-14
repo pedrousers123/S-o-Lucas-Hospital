@@ -1,0 +1,342 @@
+<div class="pacientes-page">
+
+  <header class="topo">
+
+    <div class="titulo">
+
+      <button
+        class="voltar"
+        (click)="voltarDashboard()"
+      >
+        ←
+      </button>
+
+      <div>
+        <h1>Pacientes</h1>
+
+        <p>
+          Gerenciamento dos pacientes do hospital
+        </p>
+      </div>
+
+    </div>
+
+    <button
+      class="novo-button"
+      (click)="abrirFormulario()"
+    >
+      + Novo paciente
+    </button>
+
+  </header>
+
+
+  @if (mensagem) {
+
+    <div class="mensagem sucesso">
+      ✓ {{ mensagem }}
+    </div>
+
+  }
+
+
+  <!-- FORMULÁRIO -->
+
+  @if (mostrarFormulario) {
+
+    <section class="form-card">
+
+      <div class="form-header">
+
+        <div>
+          <h2>Novo paciente</h2>
+
+          <p>
+            Informe os dados do paciente.
+          </p>
+        </div>
+
+        <button
+          class="fechar"
+          (click)="fecharFormulario()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      @if (erro) {
+
+        <div class="mensagem erro">
+          ⚠ {{ erro }}
+        </div>
+
+      }
+
+
+      <form (ngSubmit)="salvarPaciente()">
+
+        <div class="form-grid">
+
+          <div class="campo campo-grande">
+
+            <label>
+              Nome completo *
+            </label>
+
+            <input
+              type="text"
+              [(ngModel)]="nome"
+              name="nome"
+              placeholder="Digite o nome completo"
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              CPF *
+            </label>
+
+            <input
+              type="text"
+              [(ngModel)]="cpf"
+              name="cpf"
+              placeholder="000.000.000-00"
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              Telefone *
+            </label>
+
+            <input
+              type="text"
+              [(ngModel)]="telefone"
+              name="telefone"
+              placeholder="(00) 00000-0000"
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              Data de nascimento *
+            </label>
+
+            <input
+              type="date"
+              [(ngModel)]="nascimento"
+              name="nascimento"
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              Convênio
+            </label>
+
+            <select
+              [(ngModel)]="convenio"
+              name="convenio"
+            >
+
+              <option value="">
+                Selecione
+              </option>
+
+              <option value="Particular">
+                Particular
+              </option>
+
+              <option value="Unimed">
+                Unimed
+              </option>
+
+              <option value="Bradesco Saúde">
+                Bradesco Saúde
+              </option>
+
+              <option value="Amil">
+                Amil
+              </option>
+
+              <option value="SulAmérica">
+                SulAmérica
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancelar"
+            (click)="fecharFormulario()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="salvar"
+          >
+            Cadastrar paciente
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  }
+
+
+  <!-- LISTA -->
+
+  <section class="lista-card">
+
+    <div class="lista-header">
+
+      <div>
+        <h2>Pacientes cadastrados</h2>
+
+        <span>
+          {{ pacientes.length }} paciente(s)
+        </span>
+      </div>
+
+
+      <div class="busca">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          [(ngModel)]="busca"
+          placeholder="Buscar paciente ou CPF"
+        >
+
+      </div>
+
+    </div>
+
+
+    @if (pacientesFiltrados().length === 0) {
+
+      <div class="vazio">
+
+        <div class="vazio-icon">
+          👥
+        </div>
+
+        <h3>
+          Nenhum paciente encontrado
+        </h3>
+
+        <p>
+          Cadastre um paciente para começar.
+        </p>
+
+        <button
+          (click)="abrirFormulario()"
+        >
+          + Cadastrar paciente
+        </button>
+
+      </div>
+
+    } @else {
+
+      <div class="tabela">
+
+        <div class="tabela-header">
+
+          <span>Paciente</span>
+          <span>CPF</span>
+          <span>Telefone</span>
+          <span>Convênio</span>
+          <span>Ações</span>
+
+        </div>
+
+
+        @for (
+          paciente of pacientesFiltrados();
+          track paciente.id
+        ) {
+
+          <div class="tabela-linha">
+
+            <div class="paciente-nome">
+
+              <div class="avatar">
+                {{ paciente.nome.charAt(0).toUpperCase() }}
+              </div>
+
+              <div>
+
+                <strong>
+                  {{ paciente.nome }}
+                </strong>
+
+                <small>
+                  Nascimento: {{ paciente.nascimento }}
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <span>
+              {{ paciente.cpf }}
+            </span>
+
+
+            <span>
+              {{ paciente.telefone }}
+            </span>
+
+
+            <span class="convenio">
+              {{ paciente.convenio }}
+            </span>
+
+
+            <button
+              class="excluir"
+              (click)="excluirPaciente(paciente.id)"
+            >
+              Excluir
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+</div>
