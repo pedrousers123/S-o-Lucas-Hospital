@@ -7,6 +7,8 @@ import { Pacientes } from './/pacientes/pacientes';
 import { Medicos } from './pages/medicos/medicos';
 import { Consultas } from './pages/medicos/consultas/consultas';
 import { Internacoes } from './/internacoes/internacoes';
+import { Exames } from './/exames/exames';
+import { Usuarios } from './/usuarios/usuarios';
 
 export const routes: Routes = [
 
@@ -49,6 +51,13 @@ export const routes: Routes = [
   {
     path: 'internacoes',
     component: Internacoes
-  }
-
+  },
+  {
+  path: 'exames',
+    component: Exames
+  },
+  {
+  path: 'usuarios',
+    component: Usuarios
+  } 
 ];

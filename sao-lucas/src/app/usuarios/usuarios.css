@@ -1,0 +1,245 @@
+* {
+  box-sizing: border-box;
+}
+
+.pagina {
+  min-height: 100vh;
+  padding: 30px;
+  background: #f5f8fc;
+  color: #334155;
+}
+
+
+/* TOPO */
+
+.topo {
+  margin-bottom: 22px;
+}
+
+.topo span {
+  color: #1769aa;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.topo h1 {
+  margin: 5px 0;
+  color: #173b57;
+  font-size: 25px;
+}
+
+.topo p {
+  margin: 0;
+  color: #8997a4;
+  font-size: 11px;
+}
+
+
+/* CARD */
+
+.card {
+  margin-bottom: 18px;
+  padding: 22px;
+  background: white;
+  border: 1px solid #e5ebef;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px #1f374b08;
+}
+
+
+/* TÍTULO */
+
+.titulo {
+  margin-bottom: 20px;
+}
+
+.titulo h2 {
+  margin: 0;
+  color: #173b57;
+  font-size: 16px;
+}
+
+.titulo small {
+  color: #8997a4;
+  font-size: 9px;
+}
+
+
+/* FORMULÁRIO */
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.formulario label {
+  display: block;
+  margin-bottom: 6px;
+  color: #536577;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.formulario input,
+.formulario select {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #dfe7ed;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  color: #334155;
+  font-size: 10px;
+}
+
+.formulario input:focus,
+.formulario select:focus {
+  border-color: #1769aa;
+}
+
+
+/* BOTÃO CADASTRAR */
+
+.btn-cadastrar {
+  margin-top: 18px;
+  padding: 11px 17px;
+  border: 0;
+  border-radius: 8px;
+  background: #1769aa;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.btn-cadastrar:hover {
+  background: #125889;
+}
+
+
+/* TABELA */
+
+.tabela {
+  width: 100%;
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 1fr .6fr;
+  align-items: center;
+  padding: 13px 8px;
+  border-bottom: 1px solid #edf2f5;
+  font-size: 10px;
+}
+
+.cabecalho {
+  color: #8997a4;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.nome {
+  color: #173b57;
+  font-weight: bold;
+}
+
+
+/* TIPOS */
+
+.tipo {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 15px;
+  font-size: 8px;
+}
+
+.admin {
+  background: #ffecec;
+  color: #d64545;
+}
+
+.medico {
+  background: #eaf4fa;
+  color: #1769aa;
+}
+
+.recepcao {
+  background: #e9f8f0;
+  color: #16834b;
+}
+
+
+/* EXCLUIR */
+
+.btn-excluir {
+  padding: 6px 9px;
+  border: 0;
+  border-radius: 6px;
+  background: #fff0f0;
+  color: #d64545;
+  cursor: pointer;
+  font-size: 8px;
+}
+
+.btn-excluir:hover {
+  background: #ffdede;
+}
+
+
+/* VAZIO */
+
+.vazio {
+  padding: 35px;
+  text-align: center;
+  color: #8997a4;
+  font-size: 20px;
+}
+
+.vazio p {
+  margin: 8px 0 3px;
+  color: #536577;
+  font-size: 11px;
+}
+
+.vazio small {
+  font-size: 9px;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 1000px) {
+
+  .formulario {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .linha {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .pagina {
+    padding: 18px;
+  }
+
+  .formulario {
+    grid-template-columns: 1fr;
+  }
+
+  .linha {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cabecalho {
+    display: none;
+  }
+
+}

@@ -14,44 +14,44 @@ export class Login {
   senha = '';
 
   erro = '';
-
   mostrarSenha = false;
 
   constructor(private router: Router) {}
 
-  entrar() {
+  entrar(): void {
 
     this.erro = '';
 
     if (!this.email || !this.senha) {
-
       this.erro = 'Preencha o e-mail e a senha.';
+      return;
+    }
+
+    const dados = localStorage.getItem('usuarios');
+
+    const usuarios = dados ? JSON.parse(dados) : [];
+
+    const usuario = usuarios.find(
+      (u: any) =>
+        u.email === this.email &&
+        u.senha === this.senha
+    );
+
+    if (usuario) {
+
+      localStorage.setItem(
+        'usuarioLogado',
+        JSON.stringify(usuario)
+      );
+
+      this.router.navigate(['/dashboard']);
 
       return;
     }
 
-    const usuarioSalvo = localStorage.getItem('usuarioCadastro');
-
-    if (usuarioSalvo) {
-
-      const usuario = JSON.parse(usuarioSalvo);
-
-      if (
-        this.email === usuario.email &&
-        this.senha === usuario.senha
-      ) {
-
-        localStorage.setItem(
-          'usuarioLogado',
-          JSON.stringify(usuario)
-        );
-
-        this.router.navigate(['/dashboard']);
-
-        return;
-      }
-    }
-
+    /*
+     * USUÁRIO ADMINISTRADOR PADRÃO
+     */
 
     if (
       this.email === 'admin@saolucas.com' &&
@@ -59,13 +59,9 @@ export class Login {
     ) {
 
       const administrador = {
-
         nome: 'Administrador',
-
         email: 'admin@saolucas.com',
-
         tipo: 'Administrador'
-
       };
 
       localStorage.setItem(
@@ -78,22 +74,17 @@ export class Login {
       return;
     }
 
-
     this.erro = 'E-mail ou senha incorretos.';
   }
 
 
-  alternarSenha() {
-
+  alternarSenha(): void {
     this.mostrarSenha = !this.mostrarSenha;
-
   }
 
 
-  irParaCadastro() {
-
+  irParaCadastro(): void {
     this.router.navigate(['/cadastro']);
-
   }
 
 }

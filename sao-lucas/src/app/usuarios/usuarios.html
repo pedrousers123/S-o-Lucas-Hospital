@@ -1,0 +1,209 @@
+<div class="pagina">
+
+  <div class="topo">
+
+    <div>
+      <span>ADMINISTRAÇÃO</span>
+
+      <h1>Usuários</h1>
+
+      <p>
+        Gerencie os usuários e suas permissões no sistema.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- CADASTRO -->
+
+  <div class="card">
+
+    <div class="titulo">
+
+      <div>
+        <h2>Novo usuário</h2>
+
+        <small>
+          Cadastre um novo usuário do Hospital São Lucas
+        </small>
+      </div>
+
+    </div>
+
+
+    <div class="formulario">
+
+      <div>
+
+        <label>Nome completo</label>
+
+        <input
+          type="text"
+          [(ngModel)]="nome"
+          placeholder="Digite o nome">
+
+      </div>
+
+
+      <div>
+
+        <label>E-mail</label>
+
+        <input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Digite o e-mail">
+
+      </div>
+
+
+      <div>
+
+        <label>Senha</label>
+
+        <input
+          type="password"
+          [(ngModel)]="senha"
+          placeholder="Digite a senha">
+
+      </div>
+
+
+      <div>
+
+        <label>Tipo de usuário</label>
+
+        <select [(ngModel)]="tipo">
+
+          <option value="Administrador">
+            Administrador
+          </option>
+
+          <option value="Médico">
+            Médico
+          </option>
+
+          <option value="Recepcionista">
+            Recepcionista
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn-cadastrar"
+      (click)="cadastrar()">
+
+      + Cadastrar usuário
+
+    </button>
+
+  </div>
+
+
+  <!-- USUÁRIOS -->
+
+  <div class="card">
+
+    <div class="titulo">
+
+      <div>
+
+        <h2>Usuários cadastrados</h2>
+
+        <small>
+          {{ usuarios.length }} usuários cadastrados
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="tabela">
+
+      <div class="linha cabecalho">
+
+        <span>Nome</span>
+
+        <span>E-mail</span>
+
+        <span>Tipo</span>
+
+        <span>Ação</span>
+
+      </div>
+
+
+      <div
+        class="linha"
+        *ngFor="let usuario of usuarios">
+
+        <span class="nome">
+
+          {{ usuario.nome }}
+
+        </span>
+
+
+        <span>
+
+          {{ usuario.email }}
+
+        </span>
+
+
+        <span>
+
+          <b
+            class="tipo"
+            [class.admin]="usuario.tipo === 'Administrador'"
+            [class.medico]="usuario.tipo === 'Médico'"
+            [class.recepcao]="usuario.tipo === 'Recepcionista'">
+
+            {{ usuario.tipo }}
+
+          </b>
+
+        </span>
+
+
+        <span>
+
+          <button
+            class="btn-excluir"
+            (click)="excluir(usuario.id)">
+
+            Excluir
+
+          </button>
+
+        </span>
+
+      </div>
+
+
+      <div
+        class="vazio"
+        *ngIf="usuarios.length === 0">
+
+        👤
+
+        <p>Nenhum usuário cadastrado.</p>
+
+        <small>
+          Cadastre o primeiro usuário acima.
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,164 +1,109 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-
-interface Paciente {
-  id: number;
-  nome: string;
-}
-
-interface Medico {
-  id: number;
-  nome: string;
-  especialidade: string;
-}
 
 interface Internacao {
   id: number;
   paciente: string;
-  medico: string;
+  quarto: string;
   leito: string;
-  dataEntrada: string;
-  tipo: string;
+  medico: string;
+  entrada: string;
+  previsaoAlta: string;
   status: string;
 }
 
 @Component({
   selector: 'app-internacoes',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './internacoes.html',
   styleUrl: './internacoes.css'
 })
 export class Internacoes implements OnInit {
 
-  pacientes: Paciente[] = [];
-  medicos: Medico[] = [];
   internacoes: Internacao[] = [];
 
-  paciente = '';
-  medico = '';
-  leito = '';
-  dataEntrada = '';
-  tipo = '';
-  status = 'Internado';
+  mostrarFormulario = false;
 
-  mensagem = '';
-  erro = '';
+  novaInternacao: Internacao = {
+    id: 0,
+    paciente: '',
+    quarto: '',
+    leito: '',
+    medico: '',
+    entrada: '',
+    previsaoAlta: '',
+    status: 'Estável'
+  };
 
-  tiposInternacao = [
-    'Clínica',
-    'Cirúrgica',
-    'Pediátrica',
-    'UTI',
-    'Maternidade'
-  ];
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.carregarDados();
+  ngOnInit(): void {
+    this.carregarInternacoes();
   }
 
-  carregarDados() {
+  carregarInternacoes(): void {
+    const dados = localStorage.getItem('internacoes');
 
-    const pacientesSalvos = localStorage.getItem('pacientes');
-    const medicosSalvos = localStorage.getItem('medicos');
-    const internacoesSalvas = localStorage.getItem('internacoes');
-
-    if (pacientesSalvos) {
-      this.pacientes = JSON.parse(pacientesSalvos);
+    if (dados) {
+      this.internacoes = JSON.parse(dados);
     }
-
-    if (medicosSalvos) {
-      this.medicos = JSON.parse(medicosSalvos);
-    }
-
-    if (internacoesSalvas) {
-      this.internacoes = JSON.parse(internacoesSalvas);
-    }
-
   }
 
-  adicionarInternacao() {
+  salvarInternacoes(): void {
+    localStorage.setItem(
+      'internacoes',
+      JSON.stringify(this.internacoes)
+    );
+  }
 
-    this.erro = '';
-    this.mensagem = '';
+  abrirFormulario(): void {
+    this.mostrarFormulario = true;
+
+    this.novaInternacao = {
+      id: 0,
+      paciente: '',
+      quarto: '',
+      leito: '',
+      medico: '',
+      entrada: '',
+      previsaoAlta: '',
+      status: 'Estável'
+    };
+  }
+
+  fecharFormulario(): void {
+    this.mostrarFormulario = false;
+  }
+
+  adicionarInternacao(): void {
 
     if (
-      !this.paciente ||
-      !this.medico ||
-      !this.leito ||
-      !this.dataEntrada ||
-      !this.tipo
+      !this.novaInternacao.paciente ||
+      !this.novaInternacao.quarto ||
+      !this.novaInternacao.leito ||
+      !this.novaInternacao.medico ||
+      !this.novaInternacao.entrada
     ) {
-
-      this.erro = 'Preencha todos os campos.';
-
+      alert('Preencha todos os campos obrigatórios.');
       return;
     }
 
-    const leitoOcupado = this.internacoes.some(internacao =>
-      internacao.leito === this.leito &&
-      internacao.status === 'Internado'
-    );
-
-    if (leitoOcupado) {
-
-      this.erro = 'Este leito já está ocupado.';
-
-      return;
-    }
-
-    const novaInternacao: Internacao = {
-
-      id: Date.now(),
-
-      paciente: this.paciente,
-
-      medico: this.medico,
-
-      leito: this.leito,
-
-      dataEntrada: this.dataEntrada,
-
-      tipo: this.tipo,
-
-      status: 'Internado'
-
+    const nova: Internacao = {
+      ...this.novaInternacao,
+      id: Date.now()
     };
 
-    this.internacoes.push(novaInternacao);
+    this.internacoes.push(nova);
 
-    this.salvarNoStorage();
+    this.salvarInternacoes();
 
-    this.mensagem = 'Internação cadastrada com sucesso!';
-
-    this.limparFormulario();
-
+    this.fecharFormulario();
   }
 
-  darAlta(id: number) {
-
-    const internacao = this.internacoes.find(
-      item => item.id === id
-    );
-
-    if (internacao) {
-
-      internacao.status = 'Alta';
-
-      this.salvarNoStorage();
-
-      this.mensagem = 'Alta registrada com sucesso.';
-
-    }
-
-  }
-
-  excluirInternacao(id: number) {
+  darAlta(id: number): void {
 
     const confirmar = confirm(
-      'Deseja realmente excluir esta internação?'
+      'Deseja realmente dar alta para este paciente?'
     );
 
     if (!confirmar) {
@@ -169,36 +114,33 @@ export class Internacoes implements OnInit {
       internacao => internacao.id !== id
     );
 
-    this.salvarNoStorage();
-
-    this.mensagem = 'Internação excluída com sucesso.';
-
+    this.salvarInternacoes();
   }
 
-  salvarNoStorage() {
-
-    localStorage.setItem(
-      'internacoes',
-      JSON.stringify(this.internacoes)
-    );
-
+  alterarStatus(internacao: Internacao, status: string): void {
+    internacao.status = status;
+    this.salvarInternacoes();
   }
 
-  limparFormulario() {
-
-    this.paciente = '';
-    this.medico = '';
-    this.leito = '';
-    this.dataEntrada = '';
-    this.tipo = '';
-    this.status = 'Internado';
-
+  get totalInternacoes(): number {
+    return this.internacoes.length;
   }
 
-  voltarDashboard() {
-
-    this.router.navigate(['/dashboard']);
-
+  get estaveis(): number {
+    return this.internacoes.filter(
+      item => item.status === 'Estável'
+    ).length;
   }
 
+  get observacao(): number {
+    return this.internacoes.filter(
+      item => item.status === 'Em observação'
+    ).length;
+  }
+
+  get criticos(): number {
+    return this.internacoes.filter(
+      item => item.status === 'Crítico'
+    ).length;
+  }
 }

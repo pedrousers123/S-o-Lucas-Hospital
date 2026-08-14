@@ -1,53 +1,225 @@
-.container {
-  max-width: 1100px;
+.internacoes-container {
+  min-height: 100vh;
+  padding: 30px;
+  background: #f5f8fc;
 }
 
-.card {
-  border-radius: 12px;
+
+/* CABEÇALHO */
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-.card-header {
-  border-radius: 12px 12px 0 0 !important;
+.cabecalho h1 {
+  margin: 0;
+  color: #123b63;
+  font-weight: 700;
 }
 
-.form-control,
-.form-select {
-  padding: 10px;
+.cabecalho p {
+  margin-top: 5px;
+  color: #718096;
 }
 
-.form-control:focus,
-.form-select:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.15);
-}
 
-.internacao-item {
+/* INDICADORES */
+
+.card-indicador {
   background: white;
+  border-radius: 15px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   transition: 0.2s;
 }
 
-.internacao-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.card-indicador:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
 }
 
-.internacao-item h6 {
+.card-indicador span {
+  color: #718096;
+  font-size: 14px;
+}
+
+.card-indicador h2 {
+  margin: 3px 0 0;
+  color: #1a202c;
+}
+
+
+/* ÍCONES */
+
+.icone {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.azul {
+  background: #e0efff;
+  color: #1672d4;
+}
+
+.verde {
+  background: #e4f8ec;
+  color: #16834b;
+}
+
+.amarelo {
+  background: #fff5d8;
+  color: #c28a00;
+}
+
+.vermelho {
+  background: #ffe4e4;
+  color: #d83b3b;
+}
+
+
+/* FORMULÁRIO */
+
+.formulario {
+  margin-bottom: 25px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.formulario label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #344054;
+}
+
+.botoes-formulario {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+
+/* TABELA */
+
+.tabela {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.tabela .card-header {
+  background: white;
+  padding: 20px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.tabela h4 {
+  margin: 0;
+  color: #123b63;
+  font-weight: 700;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.table tbody tr {
+  transition: 0.2s;
+}
+
+.table tbody tr:hover {
+  background: #f8fbff;
+}
+
+
+/* STATUS */
+
+.status-select {
+  width: 145px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-estavel {
+  color: #16834b;
+  background: #e4f8ec;
+}
+
+.status-observacao {
+  color: #b77900;
+  background: #fff5d8;
+}
+
+.status-critico {
+  color: #c62828;
+  background: #ffe4e4;
+}
+
+
+/* ESTADO VAZIO */
+
+.estado-vazio {
+  text-align: center;
+  padding: 60px 20px !important;
+  color: #718096;
+}
+
+.estado-vazio i {
+  font-size: 45px;
+  color: #8aa8c5;
+}
+
+.estado-vazio h5 {
+  margin-top: 15px;
   color: #334155;
 }
 
-.btn {
-  border-radius: 8px;
-}
+
+/* RESPONSIVO */
 
 @media (max-width: 768px) {
 
-  .container {
-    padding-left: 15px;
-    padding-right: 15px;
+  .internacoes-container {
+    padding: 20px 15px;
   }
 
-  .internacao-item {
-    padding: 18px !important;
+  .cabecalho {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .cabecalho button {
+    width: 100%;
+  }
+
+  .botoes-formulario {
+    flex-direction: column;
+  }
+
+  .botoes-formulario button {
+    width: 100%;
   }
 
 }

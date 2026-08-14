@@ -4,147 +4,102 @@
   <aside class="sidebar">
 
     <div class="logo">
-      <div class="logo-icon">+</div>
+      <b>+</b>
 
-      <div>
-        <strong>São Lucas</strong>
+      <span>
+        São Lucas
         <small>Hospital</small>
-      </div>
+      </span>
     </div>
 
-    <div class="menu-title">
-      PRINCIPAL
-    </div>
+    <p>PRINCIPAL</p>
 
-    <nav class="menu">
+    <button class="menu active">
+      ▦ Dashboard
+    </button>
 
-      <button
-        type="button"
-        class="menu-button active"
-      >
-        <span class="icon">▦</span>
-        <span>Dashboard</span>
+    <!-- PACIENTES -->
+    <button class="menu" (click)="abrirPacientes()">
+      👥 Pacientes
+    </button>
+
+    <!-- MÉDICOS - SOMENTE ADMIN -->
+    @if (tipoUsuario === 'Administrador') {
+      <button class="menu" (click)="abrirMedicos()">
+        👨‍⚕️ Médicos
       </button>
+    }
 
-      <button
-        type="button"
-        class="menu-button"
-        (click)="abrirPacientes()"
-      >
-        <span class="icon">👥</span>
-        <span>Pacientes</span>
+    <!-- CONSULTAS -->
+    <button class="menu" (click)="abrirConsultas()">
+      📅 Consultas
+    </button>
+
+    <!-- INTERNAÇÕES -->
+    <button class="menu" (click)="abrirInternacoes()">
+      🏥 Internações
+    </button>
+
+    <!-- EXAMES -->
+    <button class="menu" (click)="abrirExames()">
+      🧪 Exames
+    </button>
+
+    <!-- USUÁRIOS - SOMENTE ADMIN -->
+    @if (tipoUsuario === 'Administrador') {
+      <button class="menu" (click)="abrirUsuarios()">
+        👤 Usuários
       </button>
+    }
 
-      <button
-        type="button"
-        class="menu-button"
-        (click)="abrirMedicos()"
-      >
-        <span class="icon">👨‍⚕️</span>
-        <span>Médicos</span>
+
+    <p>SISTEMA</p>
+
+    <!-- CONFIGURAÇÕES - SOMENTE ADMIN -->
+    @if (tipoUsuario === 'Administrador') {
+      <button class="menu" (click)="abrirConfiguracoes()">
+        ⚙ Configurações
       </button>
+    }
 
-      <button
-        type="button"
-        class="menu-button"
-        (click)="abrirConsultas()"
-      >
-        <span class="icon">📅</span>
-        <span>Consultas</span>
-      </button>
-
-      <button
-        type="button"
-        class="menu-button"
-      >
-        <span class="icon">🏥</span>
-        <span>Internações</span>
-      </button>
-
-      <button
-        type="button"
-        class="menu-button"
-      >
-        <span class="icon">🧪</span>
-        <span>Exames</span>
-      </button>
-
-    </nav>
-
-
-    <div class="menu-title sistema">
-      SISTEMA
-    </div>
-
-    <nav class="menu">
-
-      <button
-        type="button"
-        class="menu-button"
-      >
-        <span class="icon">⚙</span>
-        <span>Configurações</span>
-      </button>
-
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-      <button
-        type="button"
-        class="logout"
-        (click)="voltarLogin()"
-      >
-        <span>⇥</span>
-        <span>Sair</span>
-      </button>
-
-    </div>
+    <button class="sair" (click)="voltarLogin()">
+      ⇥ Sair
+    </button>
 
   </aside>
 
 
-  <!-- ÁREA PRINCIPAL -->
-  <main class="main">
+  <!-- CONTEÚDO -->
+  <main>
 
-    <!-- TOPO -->
-
-    <header class="topbar">
+    <!-- HEADER -->
+    <header>
 
       <div>
         <h1>Dashboard</h1>
 
-        <p>
+        <small>
           Visão geral do Hospital São Lucas
-        </p>
+        </small>
       </div>
 
 
-      <div class="user-area">
+      <!-- USUÁRIO LOGADO -->
+      <div class="usuario">
 
-        <div class="notification">
-          🔔
-          <span>3</span>
-        </div>
+        <span>🔔</span>
 
-        <div class="user">
+        <b>A</b>
 
-          <div class="avatar">
-            A
-          </div>
+        <div>
 
-          <div class="user-info">
+          <strong>
+            {{ nomeUsuario }}
+          </strong>
 
-            <strong>
-              {{ nomeUsuario }}
-            </strong>
-
-            <small>
-              Administrador
-            </small>
-
-          </div>
+          <small>
+            {{ tipoUsuario }}
+          </small>
 
         </div>
 
@@ -153,13 +108,17 @@
     </header>
 
 
-    <!-- CONTEÚDO -->
+    <section class="conteudo">
 
-    <section class="content">
 
-      <div class="welcome">
+      <!-- BOAS-VINDAS -->
+      <div class="boas-vindas">
 
         <div>
+
+          <span>
+            PAINEL ADMINISTRATIVO
+          </span>
 
           <h2>
             Olá, {{ nomeUsuario }} 👋
@@ -171,36 +130,29 @@
 
         </div>
 
-        <div class="date">
+        <label>
           📅 Hoje
-        </div>
+        </label>
 
       </div>
 
 
-      <!-- INDICADORES -->
-
+      <!-- CARDS -->
       <div class="cards">
 
-        <div class="card">
 
-          <div class="card-top">
+        <!-- PACIENTES -->
+        <div
+          class="card"
+          (click)="abrirPacientes()">
 
-            <div class="card-icon blue">
-              👥
-            </div>
+          <i>👥</i>
 
-            <span class="card-status">
-              +8%
-            </span>
-
-          </div>
-
-          <span class="card-label">
+          <span>
             Pacientes
           </span>
 
-          <strong class="card-number">
+          <strong>
             {{ pacientes }}
           </strong>
 
@@ -211,83 +163,66 @@
         </div>
 
 
-        <div class="card">
+        <!-- MÉDICOS - SOMENTE ADMIN -->
+        @if (tipoUsuario === 'Administrador') {
 
-          <div class="card-top">
+          <div
+            class="card"
+            (click)="abrirMedicos()">
 
-            <div class="card-icon green">
-              👨‍⚕️
-            </div>
+            <i>👨‍⚕️</i>
 
-            <span class="card-status">
-              Ativos
+            <span>
+              Médicos
             </span>
+
+            <strong>
+              {{ medicos }}
+            </strong>
+
+            <small>
+              profissionais cadastrados
+            </small>
 
           </div>
 
-          <span class="card-label">
-            Médicos
-          </span>
-
-          <strong class="card-number">
-            {{ medicos }}
-          </strong>
-
-          <small>
-            profissionais cadastrados
-          </small>
-
-        </div>
+        }
 
 
-        <div class="card">
+        <!-- CONSULTAS -->
+        <div
+          class="card"
+          (click)="abrirConsultas()">
 
-          <div class="card-top">
+          <i>📅</i>
 
-            <div class="card-icon orange">
-              📅
-            </div>
-
-            <span class="card-status">
-              Hoje
-            </span>
-
-          </div>
-
-          <span class="card-label">
+          <span>
             Consultas
           </span>
 
-          <strong class="card-number">
+          <strong>
             {{ consultasHoje }}
           </strong>
 
           <small>
-            atendimentos agendados
+            atendimentos hoje
           </small>
 
         </div>
 
 
-        <div class="card">
+        <!-- INTERNAÇÕES -->
+        <div
+          class="card"
+          (click)="abrirInternacoes()">
 
-          <div class="card-top">
+          <i>🏥</i>
 
-            <div class="card-icon purple">
-              🏥
-            </div>
-
-            <span class="card-status">
-              72%
-            </span>
-
-          </div>
-
-          <span class="card-label">
+          <span>
             Internações
           </span>
 
-          <strong class="card-number">
+          <strong>
             {{ internacoes }}
           </strong>
 
@@ -297,219 +232,414 @@
 
         </div>
 
+
+        <!-- EXAMES -->
+        <div
+          class="card"
+          (click)="abrirExames()">
+
+          <i>🧪</i>
+
+          <span>
+            Exames
+          </span>
+
+          <strong>
+            {{ exames }}
+          </strong>
+
+          <small>
+            exames cadastrados
+          </small>
+
+        </div>
+
+
+        <!-- EXAMES PENDENTES -->
+        <div
+          class="card"
+          (click)="abrirExames()">
+
+          <i>⏳</i>
+
+          <span>
+            Exames pendentes
+          </span>
+
+          <strong>
+            {{ examesPendentes }}
+          </strong>
+
+          <small>
+            aguardando realização
+          </small>
+
+        </div>
+
       </div>
 
 
-      <!-- PARTE INFERIOR -->
-
-      <div class="dashboard-grid">
+      <!-- PAINÉIS -->
+      <div class="grid">
 
 
         <!-- CONSULTAS -->
+        <div class="painel">
 
-        <div class="panel">
-
-          <div class="panel-header">
+          <div class="titulo">
 
             <div>
+
+              <span>
+                AGENDA
+              </span>
 
               <h3>
                 Próximas consultas
               </h3>
 
-              <p>
-                Atendimentos programados para hoje
-              </p>
+              <small>
+                Atendimentos de hoje
+              </small>
 
             </div>
 
             <button
-              class="see-all"
-              (click)="abrirConsultas()"
-            >
+              (click)="abrirConsultas()">
+
               Ver agenda →
+
             </button>
 
           </div>
 
 
-          <div class="appointment">
+          <div class="consulta">
 
-            <div class="appointment-time">
-              <strong>09:00</strong>
-              <small>Hoje</small>
-            </div>
+            <b>
+              09:00
+            </b>
 
-            <div class="patient-avatar">
+            <i>
               MS
-            </div>
+            </i>
 
-            <div class="appointment-info">
+            <div>
 
               <strong>
                 Maria Silva
               </strong>
 
               <small>
-                Dr. Carlos Oliveira · Cardiologia
+                Dr. Carlos · Cardiologia
               </small>
 
             </div>
 
-            <span class="badge blue-badge">
+            <label>
               Confirmada
-            </span>
+            </label>
 
           </div>
 
 
-          <div class="appointment">
+          <div class="consulta">
 
-            <div class="appointment-time">
-              <strong>10:30</strong>
-              <small>Hoje</small>
-            </div>
+            <b>
+              10:30
+            </b>
 
-            <div class="patient-avatar green-avatar">
+            <i>
               JS
-            </div>
+            </i>
 
-            <div class="appointment-info">
+            <div>
 
               <strong>
                 João Santos
               </strong>
 
               <small>
-                Dra. Ana Costa · Clínica Geral
+                Dra. Ana · Clínica Geral
               </small>
 
             </div>
 
-            <span class="badge orange-badge">
+            <label>
               Aguardando
-            </span>
+            </label>
 
           </div>
 
 
-          <div class="appointment">
+          <div class="consulta">
 
-            <div class="appointment-time">
-              <strong>14:00</strong>
-              <small>Hoje</small>
-            </div>
+            <b>
+              14:00
+            </b>
 
-            <div class="patient-avatar purple-avatar">
+            <i>
               AC
-            </div>
+            </i>
 
-            <div class="appointment-info">
+            <div>
 
               <strong>
                 Ana Carvalho
               </strong>
 
               <small>
-                Dr. Pedro Lima · Ortopedia
+                Dr. Pedro · Ortopedia
               </small>
 
             </div>
 
-            <span class="badge blue-badge">
+            <label>
               Confirmada
-            </span>
+            </label>
+
+          </div>
+
+
+          <div class="consulta">
+
+            <b>
+              16:30
+            </b>
+
+            <i>
+              RM
+            </i>
+
+            <div>
+
+              <strong>
+                Rafael Martins
+              </strong>
+
+              <small>
+                Dra. Juliana · Neurologia
+              </small>
+
+            </div>
+
+            <label>
+              Confirmada
+            </label>
 
           </div>
 
         </div>
 
 
-        <!-- RESUMO -->
+        <!-- OCUPAÇÃO DOS LEITOS -->
+        <div class="painel">
 
-        <div class="panel resumo">
-
-          <div class="panel-header">
+          <div class="titulo">
 
             <div>
+
+              <span>
+                LEITOS
+              </span>
 
               <h3>
                 Ocupação hospitalar
               </h3>
 
-              <p>
+              <small>
                 Situação atual dos leitos
+              </small>
+
+            </div>
+
+            <strong>
+              {{ porcentagemOcupacao }}%
+            </strong>
+
+          </div>
+
+
+          <div class="ocupacao">
+
+            <div class="circulo">
+
+              {{ porcentagemOcupacao }}%
+
+              <small>
+                ocupação
+              </small>
+
+            </div>
+
+
+            <div>
+
+              <strong>
+                {{ leitosOcupados }} de {{ totalLeitos }}
+              </strong>
+
+              <p>
+                leitos ocupados
               </p>
+
+              <small>
+                {{ leitosDisponiveis }} disponíveis
+              </small>
 
             </div>
 
           </div>
 
 
-          <div class="occupancy">
+          <div class="barra">
 
-            <div class="occupancy-number">
-              72%
+            <div
+              [style.width.%]="porcentagemOcupacao">
             </div>
 
-            <div class="occupancy-text">
+          </div>
+
+
+          <!-- LEITOS -->
+          <div class="leitos">
+
+            <div>
+
+              🟢
+
               <strong>
-                Ocupação total
+                {{ leitosDisponiveis }}
               </strong>
 
               <small>
-                86 de 120 leitos ocupados
+                Disponíveis
               </small>
+
             </div>
 
-          </div>
-
-
-          <div class="progress">
-
-            <div class="progress-bar"></div>
-
-          </div>
-
-
-          <div class="bed-row">
 
             <div>
-              <span class="dot available"></span>
-              Disponíveis
+
+              🔵
+
+              <strong>
+                {{ leitosOcupados }}
+              </strong>
+
+              <small>
+                Ocupados
+              </small>
+
             </div>
 
-            <strong>
-              34
-            </strong>
+
+            <div>
+
+              🟡
+
+              <strong>
+                {{ leitosReservados }}
+              </strong>
+
+              <small>
+                Reservados
+              </small>
+
+            </div>
+
+
+            <div>
+
+              🔴
+
+              <strong>
+                {{ leitosManutencao }}
+              </strong>
+
+              <small>
+                Manutenção
+              </small>
+
+            </div>
 
           </div>
 
 
-          <div class="bed-row">
+          <h4>
+            Ocupação por setor
+          </h4>
+
+
+          <!-- UTI -->
+          <div class="setor">
+
+            <span>
+              UTI
+              <b>92%</b>
+            </span>
 
             <div>
-              <span class="dot occupied"></span>
-              Ocupados
+              <i style="width:92%"></i>
             </div>
-
-            <strong>
-              86
-            </strong>
 
           </div>
 
 
-          <div class="bed-row">
+          <!-- ENFERMARIA -->
+          <div class="setor">
+
+            <span>
+              Enfermaria
+              <b>74%</b>
+            </span>
 
             <div>
-              <span class="dot maintenance"></span>
-              Manutenção
+              <i style="width:74%"></i>
             </div>
 
-            <strong>
-              5
-            </strong>
+          </div>
+
+
+          <!-- PEDIATRIA -->
+          <div class="setor">
+
+            <span>
+              Pediatria
+              <b>61%</b>
+            </span>
+
+            <div>
+              <i style="width:61%"></i>
+            </div>
+
+          </div>
+
+
+          <!-- APARTAMENTOS -->
+          <div class="setor">
+
+            <span>
+              Apartamentos
+              <b>58%</b>
+            </span>
+
+            <div>
+              <i style="width:58%"></i>
+            </div>
+
+          </div>
+
+
+          <div class="alerta">
+
+            ⚠
+
+            <b>
+              Atenção:
+            </b>
+
+            UTI acima de 90%.
 
           </div>
 
@@ -518,54 +648,159 @@
       </div>
 
 
-      <!-- ATALHOS -->
-
-      <div class="quick-title">
+      <!-- ACESSO RÁPIDO -->
+      <h3 class="atalhos">
         Acesso rápido
-      </div>
+      </h3>
 
-      <div class="quick-actions">
 
+      <div class="acoes">
+
+
+        <!-- NOVO PACIENTE -->
         <button
-          (click)="abrirPacientes()"
-        >
-          <span>👥</span>
-          <div>
-            <strong>Novo paciente</strong>
-            <small>Cadastrar paciente</small>
-          </div>
+          (click)="abrirPacientes()">
+
+          👥
+
+          <span>
+
+            <b>
+              Novo paciente
+            </b>
+
+            <small>
+              Cadastrar paciente
+            </small>
+
+          </span>
+
+          →
+
         </button>
 
 
+        <!-- NOVO MÉDICO - SOMENTE ADMIN -->
+        @if (tipoUsuario === 'Administrador') {
+
+          <button
+            (click)="abrirMedicos()">
+
+            👨‍⚕️
+
+            <span>
+
+              <b>
+                Novo médico
+              </b>
+
+              <small>
+                Cadastrar profissional
+              </small>
+
+            </span>
+
+            →
+
+          </button>
+
+        }
+
+
+        <!-- NOVA CONSULTA -->
         <button
-          (click)="abrirMedicos()"
-        >
-          <span>👨‍⚕️</span>
-          <div>
-            <strong>Novo médico</strong>
-            <small>Cadastrar profissional</small>
-          </div>
+          (click)="abrirConsultas()">
+
+          📅
+
+          <span>
+
+            <b>
+              Nova consulta
+            </b>
+
+            <small>
+              Agendar atendimento
+            </small>
+
+          </span>
+
+          →
+
         </button>
 
 
+        <!-- NOVA INTERNAÇÃO -->
         <button
-          (click)="abrirConsultas()"
-        >
-          <span>📅</span>
-          <div>
-            <strong>Nova consulta</strong>
-            <small>Agendar atendimento</small>
-          </div>
+          (click)="abrirInternacoes()">
+
+          🏥
+
+          <span>
+
+            <b>
+              Nova internação
+            </b>
+
+            <small>
+              Internar paciente
+            </small>
+
+          </span>
+
+          →
+
         </button>
 
 
-        <button>
-          <span>🧪</span>
-          <div>
-            <strong>Novo exame</strong>
-            <small>Solicitar exame</small>
-          </div>
+        <!-- NOVO EXAME -->
+        <button
+          (click)="abrirExames()">
+
+          🧪
+
+          <span>
+
+            <b>
+              Novo exame
+            </b>
+
+            <small>
+              Cadastrar exame
+            </small>
+
+          </span>
+
+          →
+
         </button>
+
+
+        <!-- USUÁRIOS - SOMENTE ADMIN -->
+        @if (tipoUsuario === 'Administrador') {
+
+          <button
+            (click)="abrirUsuarios()">
+
+            👤
+
+            <span>
+
+              <b>
+                Usuários
+              </b>
+
+              <small>
+                Gerenciar acessos
+              </small>
+
+            </span>
+
+            →
+
+          </button>
+
+        }
 
       </div>
 

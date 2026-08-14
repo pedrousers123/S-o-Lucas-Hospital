@@ -1,161 +1,210 @@
-<div class="container py-4">
+<div class="internacoes-container">
 
-  <!-- CABEÇALHO -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div class="cabecalho">
 
     <div>
-      <h1 class="fw-bold mb-1">
-        <i class="bi bi-hospital text-primary"></i>
-        Internações
-      </h1>
-
-      <p class="text-muted mb-0">
-        Controle de pacientes internados e leitos
-      </p>
+      <h1>Internações</h1>
+      <p>Gerenciamento dos pacientes internados</p>
     </div>
 
     <button
-      class="btn btn-outline-primary"
-      (click)="voltarDashboard()"
+      class="btn btn-primary"
+      (click)="abrirFormulario()"
     >
-      <i class="bi bi-arrow-left"></i>
-      Dashboard
+      <i class="bi bi-plus-lg"></i>
+      Nova internação
     </button>
 
   </div>
 
 
-  <!-- FORMULÁRIO -->
-  <div class="card shadow-sm border-0 mb-4">
+  <!-- INDICADORES -->
 
-    <div class="card-header bg-primary text-white py-3">
+  <div class="row g-4 mb-4">
 
-      <h5 class="mb-0">
-        <i class="bi bi-plus-circle"></i>
-        Nova internação
-      </h5>
+    <div class="col-md-3">
+
+      <div class="card-indicador">
+
+        <div class="icone azul">
+          <i class="bi bi-hospital"></i>
+        </div>
+
+        <div>
+          <span>Total internados</span>
+          <h2>{{ totalInternacoes }}</h2>
+        </div>
+
+      </div>
 
     </div>
 
+
+    <div class="col-md-3">
+
+      <div class="card-indicador">
+
+        <div class="icone verde">
+          <i class="bi bi-check-circle"></i>
+        </div>
+
+        <div>
+          <span>Estáveis</span>
+          <h2>{{ estaveis }}</h2>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+      <div class="card-indicador">
+
+        <div class="icone amarelo">
+          <i class="bi bi-eye"></i>
+        </div>
+
+        <div>
+          <span>Em observação</span>
+          <h2>{{ observacao }}</h2>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+      <div class="card-indicador">
+
+        <div class="icone vermelho">
+          <i class="bi bi-exclamation-triangle"></i>
+        </div>
+
+        <div>
+          <span>Críticos</span>
+          <h2>{{ criticos }}</h2>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FORMULÁRIO -->
+
+  <div
+    class="card formulario"
+    *ngIf="mostrarFormulario"
+  >
+
+    <div class="card-header">
+      <h4>Nova internação</h4>
+    </div>
 
     <div class="card-body">
 
       <div class="row g-3">
 
-        <!-- PACIENTE -->
         <div class="col-md-6">
 
-          <label class="form-label fw-semibold">
-            Paciente
-          </label>
-
-          <select
-            class="form-select"
-            [(ngModel)]="paciente"
-          >
-
-            <option value="">
-              Selecione o paciente
-            </option>
-
-            @for (item of pacientes; track item.id) {
-
-              <option [value]="item.nome">
-                {{ item.nome }}
-              </option>
-
-            }
-
-          </select>
-
-        </div>
-
-
-        <!-- MÉDICO -->
-        <div class="col-md-6">
-
-          <label class="form-label fw-semibold">
-            Médico responsável
-          </label>
-
-          <select
-            class="form-select"
-            [(ngModel)]="medico"
-          >
-
-            <option value="">
-              Selecione o médico
-            </option>
-
-            @for (item of medicos; track item.id) {
-
-              <option [value]="item.nome">
-                {{ item.nome }} - {{ item.especialidade }}
-              </option>
-
-            }
-
-          </select>
-
-        </div>
-
-
-        <!-- LEITO -->
-        <div class="col-md-4">
-
-          <label class="form-label fw-semibold">
-            Número do leito
-          </label>
+          <label>Paciente *</label>
 
           <input
             type="text"
             class="form-control"
-            placeholder="Ex: 101"
-            [(ngModel)]="leito"
+            [(ngModel)]="novaInternacao.paciente"
+            placeholder="Nome do paciente"
           >
 
         </div>
 
 
-        <!-- DATA -->
-        <div class="col-md-4">
+        <div class="col-md-3">
 
-          <label class="form-label fw-semibold">
-            Data de entrada
-          </label>
+          <label>Quarto *</label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="novaInternacao.quarto"
+            placeholder="Ex: 203"
+          >
+
+        </div>
+
+
+        <div class="col-md-3">
+
+          <label>Leito *</label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="novaInternacao.leito"
+            placeholder="Ex: A"
+          >
+
+        </div>
+
+
+        <div class="col-md-6">
+
+          <label>Médico responsável *</label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="novaInternacao.medico"
+            placeholder="Nome do médico"
+          >
+
+        </div>
+
+
+        <div class="col-md-3">
+
+          <label>Data de entrada *</label>
 
           <input
             type="date"
             class="form-control"
-            [(ngModel)]="dataEntrada"
+            [(ngModel)]="novaInternacao.entrada"
           >
 
         </div>
 
 
-        <!-- TIPO -->
+        <div class="col-md-3">
+
+          <label>Previsão de alta</label>
+
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="novaInternacao.previsaoAlta"
+          >
+
+        </div>
+
+
         <div class="col-md-4">
 
-          <label class="form-label fw-semibold">
-            Tipo de internação
-          </label>
+          <label>Status</label>
 
           <select
             class="form-select"
-            [(ngModel)]="tipo"
+            [(ngModel)]="novaInternacao.status"
           >
 
-            <option value="">
-              Selecione o tipo
-            </option>
-
-            @for (item of tiposInternacao; track item) {
-
-              <option [value]="item">
-                {{ item }}
-              </option>
-
-            }
+            <option>Estável</option>
+            <option>Em observação</option>
+            <option>Crítico</option>
 
           </select>
 
@@ -164,42 +213,20 @@
       </div>
 
 
-      <!-- ERRO -->
-      @if (erro) {
-
-        <div class="alert alert-danger mt-3 mb-0">
-
-          <i class="bi bi-exclamation-triangle"></i>
-          {{ erro }}
-
-        </div>
-
-      }
-
-
-      <!-- SUCESSO -->
-      @if (mensagem) {
-
-        <div class="alert alert-success mt-3 mb-0">
-
-          <i class="bi bi-check-circle"></i>
-          {{ mensagem }}
-
-        </div>
-
-      }
-
-
-      <div class="text-end mt-4">
+      <div class="botoes-formulario">
 
         <button
-          class="btn btn-primary px-4"
+          class="btn btn-secondary"
+          (click)="fecharFormulario()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          class="btn btn-primary"
           (click)="adicionarInternacao()"
         >
-
-          <i class="bi bi-hospital"></i>
-          Internar paciente
-
+          Salvar internação
         </button>
 
       </div>
@@ -209,202 +236,125 @@
   </div>
 
 
-  <!-- LISTA DE INTERNAÇÕES -->
-  <div class="card shadow-sm border-0">
+  <!-- LISTA -->
 
-    <div class="card-header bg-white py-3">
+  <div class="card tabela">
 
-      <div class="d-flex justify-content-between align-items-center">
+    <div class="card-header">
 
-        <div>
-
-          <h5 class="mb-1">
-            Internações cadastradas
-          </h5>
-
-          <small class="text-muted">
-            Acompanhamento dos pacientes internados
-          </small>
-
-        </div>
-
-        <span class="badge bg-primary rounded-pill">
-          {{ internacoes.length }}
-        </span>
-
-      </div>
+      <h4>Pacientes internados</h4>
 
     </div>
 
 
-    <div class="card-body">
+    <div class="table-responsive">
 
-      @if (internacoes.length === 0) {
+      <table class="table align-middle">
 
-        <div class="text-center py-5">
+        <thead>
 
-          <i class="bi bi-hospital display-4 text-muted"></i>
+          <tr>
+            <th>Paciente</th>
+            <th>Quarto</th>
+            <th>Leito</th>
+            <th>Médico</th>
+            <th>Entrada</th>
+            <th>Alta prevista</th>
+            <th>Status</th>
+            <th>Ação</th>
+          </tr>
 
-          <p class="text-muted mt-3 mb-0">
-            Nenhuma internação cadastrada.
-          </p>
-
-        </div>
-
-      }
-
-
-      @for (internacao of internacoes; track internacao.id) {
-
-        <div class="internacao-item border rounded p-3 mb-3">
-
-          <div class="row align-items-center">
+        </thead>
 
 
-            <!-- PACIENTE -->
-            <div class="col-md-3">
+        <tbody>
 
-              <small class="text-muted">
-                PACIENTE
-              </small>
+          <tr *ngFor="let internacao of internacoes">
 
-              <h6 class="mb-0 mt-1">
-
-                <i class="bi bi-person-circle text-primary"></i>
-
+            <td>
+              <strong>
                 {{ internacao.paciente }}
+              </strong>
+            </td>
 
-              </h6>
+            <td>
+              {{ internacao.quarto }}
+            </td>
 
-            </div>
+            <td>
+              {{ internacao.leito }}
+            </td>
 
+            <td>
+              {{ internacao.medico }}
+            </td>
 
-            <!-- MÉDICO -->
-            <div class="col-md-3">
+            <td>
+              {{ internacao.entrada | date:'dd/MM/yyyy' }}
+            </td>
 
-              <small class="text-muted">
-                MÉDICO
-              </small>
+            <td>
+              {{ internacao.previsaoAlta | date:'dd/MM/yyyy' }}
+            </td>
 
-              <h6 class="mb-0 mt-1">
+            <td>
 
-                <i class="bi bi-person-badge"></i>
-
-                {{ internacao.medico }}
-
-              </h6>
-
-            </div>
-
-
-            <!-- LEITO -->
-            <div class="col-md-2">
-
-              <small class="text-muted">
-                LEITO
-              </small>
-
-              <h6 class="mb-0 mt-1">
-                {{ internacao.leito }}
-              </h6>
-
-            </div>
-
-
-            <!-- TIPO -->
-            <div class="col-md-2">
-
-              <small class="text-muted">
-                TIPO
-              </small>
-
-              <h6 class="mb-0 mt-1">
-                {{ internacao.tipo }}
-              </h6>
-
-            </div>
-
-
-            <!-- STATUS -->
-            <div class="col-md-2">
-
-              <small class="text-muted">
-                STATUS
-              </small>
-
-              @if (internacao.status === 'Internado') {
-
-                <div class="mt-1">
-                  <span class="badge bg-success">
-                    <i class="bi bi-check-circle"></i>
-                    Internado
-                  </span>
-                </div>
-
-              } @else {
-
-                <div class="mt-1">
-                  <span class="badge bg-secondary">
-                    <i class="bi bi-check"></i>
-                    Alta
-                  </span>
-                </div>
-
-              }
-
-            </div>
-
-
-          </div>
-
-
-          <!-- DATA E BOTÕES -->
-          <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
-
-            <small class="text-muted">
-
-              <i class="bi bi-calendar3"></i>
-
-              Entrada:
-              {{ internacao.dataEntrada }}
-
-            </small>
-
-
-            <div class="d-flex gap-2">
-
-              @if (internacao.status === 'Internado') {
-
-                <button
-                  class="btn btn-outline-success btn-sm"
-                  (click)="darAlta(internacao.id)"
-                >
-
-                  <i class="bi bi-box-arrow-right"></i>
-                  Dar alta
-
-                </button>
-
-              }
-
-
-              <button
-                class="btn btn-outline-danger btn-sm"
-                (click)="excluirInternacao(internacao.id)"
+              <select
+                class="form-select status-select"
+                [ngClass]="{
+                  'status-estavel': internacao.status === 'Estável',
+                  'status-observacao': internacao.status === 'Em observação',
+                  'status-critico': internacao.status === 'Crítico'
+                }"
+                [ngModel]="internacao.status"
+                (ngModelChange)="alterarStatus(internacao, $event)"
               >
 
-                <i class="bi bi-trash"></i>
-                Excluir
+                <option>Estável</option>
+                <option>Em observação</option>
+                <option>Crítico</option>
 
+              </select>
+
+            </td>
+
+            <td>
+
+              <button
+                class="btn btn-sm btn-outline-success"
+                (click)="darAlta(internacao.id)"
+              >
+                <i class="bi bi-box-arrow-right"></i>
+                Alta
               </button>
 
-            </div>
+            </td>
 
-          </div>
+          </tr>
 
-        </div>
 
-      }
+          <tr *ngIf="internacoes.length === 0">
+
+            <td
+              colspan="8"
+              class="estado-vazio"
+            >
+
+              <i class="bi bi-hospital"></i>
+
+              <h5>Nenhuma internação cadastrada</h5>
+
+              <p>
+                Clique em "Nova internação" para começar.
+              </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
 
     </div>
 

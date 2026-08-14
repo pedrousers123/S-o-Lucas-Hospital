@@ -1,0 +1,78 @@
+.container {
+  max-width: 1200px;
+}
+
+h1 {
+  color: #1f2937;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 15px 20px;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.btn {
+  border-radius: 7px;
+}
+
+.table th {
+  white-space: nowrap;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.icone-exame {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #e7f1ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+@media (max-width: 768px) {
+
+  .container {
+    padding: 15px !important;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .icone-exame {
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+  }
+
+  table {
+    min-width: 850px;
+  }
+
+}
