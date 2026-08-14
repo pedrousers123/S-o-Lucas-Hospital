@@ -21,17 +21,17 @@
   box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.15);
 }
 
-.paciente-item {
+.medico-item {
   background: white;
   transition: 0.2s;
 }
 
-.paciente-item:hover {
+.medico-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.paciente-item h6 {
+.medico-item h6 {
   color: #334155;
 }
 
@@ -46,7 +46,7 @@
     padding-right: 15px;
   }
 
-  .paciente-item {
+  .medico-item {
     padding: 18px !important;
   }
 

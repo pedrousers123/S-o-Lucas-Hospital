@@ -1,0 +1,288 @@
+<div class="container py-4">
+
+  <!-- CABEÇALHO -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+      <h1 class="fw-bold mb-1">
+        <i class="bi bi-calendar2-week text-primary"></i>
+        Consultas
+      </h1>
+
+      <p class="text-muted mb-0">
+        Agendamento e controle de consultas
+      </p>
+    </div>
+
+    <button
+      class="btn btn-outline-primary"
+      (click)="voltarDashboard()"
+    >
+      <i class="bi bi-arrow-left"></i>
+      Dashboard
+    </button>
+
+  </div>
+
+
+  <!-- FORMULÁRIO -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header bg-primary text-white py-3">
+      <h5 class="mb-0">
+        <i class="bi bi-plus-circle"></i>
+        Agendar nova consulta
+      </h5>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row g-3">
+
+        <!-- PACIENTE -->
+        <div class="col-md-6">
+
+          <label class="form-label fw-semibold">
+            Paciente
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="paciente"
+          >
+
+            <option value="">
+              Selecione o paciente
+            </option>
+
+            @for (item of pacientes; track item.id) {
+
+              <option [value]="item.nome">
+                {{ item.nome }}
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+
+        <!-- MÉDICO -->
+        <div class="col-md-6">
+
+          <label class="form-label fw-semibold">
+            Médico
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="medico"
+          >
+
+            <option value="">
+              Selecione o médico
+            </option>
+
+            @for (item of medicos; track item.id) {
+
+              <option [value]="item.nome">
+                {{ item.nome }} - {{ item.especialidade }}
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+
+        <!-- DATA -->
+        <div class="col-md-6">
+
+          <label class="form-label fw-semibold">
+            Data
+          </label>
+
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="data"
+          >
+
+        </div>
+
+
+        <!-- HORÁRIO -->
+        <div class="col-md-6">
+
+          <label class="form-label fw-semibold">
+            Horário
+          </label>
+
+          <input
+            type="time"
+            class="form-control"
+            [(ngModel)]="horario"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- MENSAGEM DE ERRO -->
+      @if (erro) {
+
+        <div class="alert alert-danger mt-3 mb-0">
+          <i class="bi bi-exclamation-triangle"></i>
+          {{ erro }}
+        </div>
+
+      }
+
+
+      <!-- MENSAGEM DE SUCESSO -->
+      @if (mensagem) {
+
+        <div class="alert alert-success mt-3 mb-0">
+          <i class="bi bi-check-circle"></i>
+          {{ mensagem }}
+        </div>
+
+      }
+
+
+      <div class="text-end mt-4">
+
+        <button
+          class="btn btn-primary px-4"
+          (click)="adicionarConsulta()"
+        >
+          <i class="bi bi-calendar-plus"></i>
+          Agendar consulta
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- LISTA -->
+  <div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white py-3">
+
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div>
+          <h5 class="mb-1">
+            Consultas agendadas
+          </h5>
+
+          <small class="text-muted">
+            Consultas cadastradas no sistema
+          </small>
+        </div>
+
+        <span class="badge bg-primary rounded-pill">
+          {{ consultas.length }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+      @if (consultas.length === 0) {
+
+        <div class="text-center py-5">
+
+          <i class="bi bi-calendar-x display-4 text-muted"></i>
+
+          <p class="text-muted mt-3 mb-0">
+            Nenhuma consulta agendada.
+          </p>
+
+        </div>
+
+      }
+
+
+      @for (consulta of consultas; track consulta.id) {
+
+        <div class="consulta-item border rounded p-3 mb-3">
+
+          <div class="row align-items-center">
+
+            <div class="col-md-4">
+
+              <small class="text-muted">
+                PACIENTE
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                <i class="bi bi-person"></i>
+                {{ consulta.paciente }}
+              </h6>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+              <small class="text-muted">
+                MÉDICO
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                <i class="bi bi-person-badge"></i>
+                {{ consulta.medico }}
+              </h6>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+              <small class="text-muted">
+                DATA E HORÁRIO
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                <i class="bi bi-clock"></i>
+                {{ consulta.data }}
+                às
+                {{ consulta.horario }}
+              </h6>
+
+            </div>
+
+
+            <div class="col-md-2 text-md-end mt-3 mt-md-0">
+
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="excluirConsulta(consulta.id)"
+              >
+                <i class="bi bi-trash"></i>
+                Excluir
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>

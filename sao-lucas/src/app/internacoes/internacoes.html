@@ -1,0 +1,413 @@
+<div class="container py-4">
+
+  <!-- CABEÇALHO -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+      <h1 class="fw-bold mb-1">
+        <i class="bi bi-hospital text-primary"></i>
+        Internações
+      </h1>
+
+      <p class="text-muted mb-0">
+        Controle de pacientes internados e leitos
+      </p>
+    </div>
+
+    <button
+      class="btn btn-outline-primary"
+      (click)="voltarDashboard()"
+    >
+      <i class="bi bi-arrow-left"></i>
+      Dashboard
+    </button>
+
+  </div>
+
+
+  <!-- FORMULÁRIO -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header bg-primary text-white py-3">
+
+      <h5 class="mb-0">
+        <i class="bi bi-plus-circle"></i>
+        Nova internação
+      </h5>
+
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="row g-3">
+
+        <!-- PACIENTE -->
+        <div class="col-md-6">
+
+          <label class="form-label fw-semibold">
+            Paciente
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="paciente"
+          >
+
+            <option value="">
+              Selecione o paciente
+            </option>
+
+            @for (item of pacientes; track item.id) {
+
+              <option [value]="item.nome">
+                {{ item.nome }}
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+
+        <!-- MÉDICO -->
+        <div class="col-md-6">
+
+          <label class="form-label fw-semibold">
+            Médico responsável
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="medico"
+          >
+
+            <option value="">
+              Selecione o médico
+            </option>
+
+            @for (item of medicos; track item.id) {
+
+              <option [value]="item.nome">
+                {{ item.nome }} - {{ item.especialidade }}
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+
+        <!-- LEITO -->
+        <div class="col-md-4">
+
+          <label class="form-label fw-semibold">
+            Número do leito
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ex: 101"
+            [(ngModel)]="leito"
+          >
+
+        </div>
+
+
+        <!-- DATA -->
+        <div class="col-md-4">
+
+          <label class="form-label fw-semibold">
+            Data de entrada
+          </label>
+
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="dataEntrada"
+          >
+
+        </div>
+
+
+        <!-- TIPO -->
+        <div class="col-md-4">
+
+          <label class="form-label fw-semibold">
+            Tipo de internação
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="tipo"
+          >
+
+            <option value="">
+              Selecione o tipo
+            </option>
+
+            @for (item of tiposInternacao; track item) {
+
+              <option [value]="item">
+                {{ item }}
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- ERRO -->
+      @if (erro) {
+
+        <div class="alert alert-danger mt-3 mb-0">
+
+          <i class="bi bi-exclamation-triangle"></i>
+          {{ erro }}
+
+        </div>
+
+      }
+
+
+      <!-- SUCESSO -->
+      @if (mensagem) {
+
+        <div class="alert alert-success mt-3 mb-0">
+
+          <i class="bi bi-check-circle"></i>
+          {{ mensagem }}
+
+        </div>
+
+      }
+
+
+      <div class="text-end mt-4">
+
+        <button
+          class="btn btn-primary px-4"
+          (click)="adicionarInternacao()"
+        >
+
+          <i class="bi bi-hospital"></i>
+          Internar paciente
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- LISTA DE INTERNAÇÕES -->
+  <div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white py-3">
+
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div>
+
+          <h5 class="mb-1">
+            Internações cadastradas
+          </h5>
+
+          <small class="text-muted">
+            Acompanhamento dos pacientes internados
+          </small>
+
+        </div>
+
+        <span class="badge bg-primary rounded-pill">
+          {{ internacoes.length }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+      @if (internacoes.length === 0) {
+
+        <div class="text-center py-5">
+
+          <i class="bi bi-hospital display-4 text-muted"></i>
+
+          <p class="text-muted mt-3 mb-0">
+            Nenhuma internação cadastrada.
+          </p>
+
+        </div>
+
+      }
+
+
+      @for (internacao of internacoes; track internacao.id) {
+
+        <div class="internacao-item border rounded p-3 mb-3">
+
+          <div class="row align-items-center">
+
+
+            <!-- PACIENTE -->
+            <div class="col-md-3">
+
+              <small class="text-muted">
+                PACIENTE
+              </small>
+
+              <h6 class="mb-0 mt-1">
+
+                <i class="bi bi-person-circle text-primary"></i>
+
+                {{ internacao.paciente }}
+
+              </h6>
+
+            </div>
+
+
+            <!-- MÉDICO -->
+            <div class="col-md-3">
+
+              <small class="text-muted">
+                MÉDICO
+              </small>
+
+              <h6 class="mb-0 mt-1">
+
+                <i class="bi bi-person-badge"></i>
+
+                {{ internacao.medico }}
+
+              </h6>
+
+            </div>
+
+
+            <!-- LEITO -->
+            <div class="col-md-2">
+
+              <small class="text-muted">
+                LEITO
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                {{ internacao.leito }}
+              </h6>
+
+            </div>
+
+
+            <!-- TIPO -->
+            <div class="col-md-2">
+
+              <small class="text-muted">
+                TIPO
+              </small>
+
+              <h6 class="mb-0 mt-1">
+                {{ internacao.tipo }}
+              </h6>
+
+            </div>
+
+
+            <!-- STATUS -->
+            <div class="col-md-2">
+
+              <small class="text-muted">
+                STATUS
+              </small>
+
+              @if (internacao.status === 'Internado') {
+
+                <div class="mt-1">
+                  <span class="badge bg-success">
+                    <i class="bi bi-check-circle"></i>
+                    Internado
+                  </span>
+                </div>
+
+              } @else {
+
+                <div class="mt-1">
+                  <span class="badge bg-secondary">
+                    <i class="bi bi-check"></i>
+                    Alta
+                  </span>
+                </div>
+
+              }
+
+            </div>
+
+
+          </div>
+
+
+          <!-- DATA E BOTÕES -->
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+
+            <small class="text-muted">
+
+              <i class="bi bi-calendar3"></i>
+
+              Entrada:
+              {{ internacao.dataEntrada }}
+
+            </small>
+
+
+            <div class="d-flex gap-2">
+
+              @if (internacao.status === 'Internado') {
+
+                <button
+                  class="btn btn-outline-success btn-sm"
+                  (click)="darAlta(internacao.id)"
+                >
+
+                  <i class="bi bi-box-arrow-right"></i>
+                  Dar alta
+
+                </button>
+
+              }
+
+
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="excluirInternacao(internacao.id)"
+              >
+
+                <i class="bi bi-trash"></i>
+                Excluir
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>
