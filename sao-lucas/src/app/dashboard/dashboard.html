@@ -18,7 +18,6 @@
 
     <nav class="menu">
 
-      <!-- DASHBOARD -->
       <button
         type="button"
         class="menu-button active"
@@ -27,8 +26,6 @@
         <span>Dashboard</span>
       </button>
 
-
-      <!-- PACIENTES -->
       <button
         type="button"
         class="menu-button"
@@ -38,8 +35,6 @@
         <span>Pacientes</span>
       </button>
 
-
-      <!-- MÉDICOS -->
       @if (podeVerMedicos()) {
 
         <button
@@ -53,8 +48,6 @@
 
       }
 
-
-      <!-- CONSULTAS -->
       <button
         type="button"
         class="menu-button"
@@ -64,8 +57,6 @@
         <span>Consultas</span>
       </button>
 
-
-      <!-- INTERNAÇÕES -->
       <button
         type="button"
         class="menu-button"
@@ -75,8 +66,6 @@
         <span>Internações</span>
       </button>
 
-
-      <!-- EXAMES -->
       @if (podeVerExames()) {
 
         <button
@@ -90,8 +79,6 @@
 
       }
 
-
-      <!-- RELATÓRIOS -->
       @if (podeVerRelatorios()) {
 
         <button
@@ -107,16 +94,12 @@
 
     </nav>
 
-
-    <!-- SISTEMA -->
-
     <div class="menu-title sistema">
       SISTEMA
     </div>
 
     <nav class="menu">
 
-      <!-- USUÁRIOS -->
       @if (podeVerUsuarios()) {
 
         <button
@@ -131,9 +114,6 @@
       }
 
     </nav>
-
-
-    <!-- SAIR -->
 
     <div class="sidebar-bottom">
 
@@ -155,7 +135,6 @@
 
   <main class="main">
 
-
     <!-- TOPO -->
 
     <header class="topbar">
@@ -175,16 +154,69 @@
 
       <div class="user-area">
 
+        <!-- NOTIFICAÇÕES -->
+
         <div class="notification">
 
-          🔔
+          <button
+            type="button"
+            class="notification-button"
+            (click)="abrirNotificacoes()"
+          >
 
-          <span>
-            {{ examesPendentes }}
-          </span>
+            🔔
+
+            @if (examesPendentes > 0) {
+
+              <span>
+                {{ examesPendentes }}
+              </span>
+
+            }
+
+          </button>
+
+
+          @if (notificacoesAbertas) {
+
+            <div class="notification-box">
+
+              <strong>
+                Notificações
+              </strong>
+
+
+              @if (examesPendentes > 0) {
+
+                <p>
+                  ⚠️ Você tem
+                  {{ examesPendentes }}
+                  exame(s) pendente(s).
+                </p>
+
+                <button
+                  type="button"
+                  (click)="abrirExames()"
+                >
+                  Ver exames
+                </button>
+
+              } @else {
+
+                <p>
+                  ✅ Nenhuma notificação no momento.
+                </p>
+
+              }
+
+            </div>
+
+          }
 
         </div>
 
+
+        <!-- USUÁRIO -->
 
         <div class="user">
 
@@ -215,7 +247,6 @@
 
     <section class="content">
 
-
       <!-- BOAS-VINDAS -->
 
       <div class="welcome">
@@ -232,7 +263,6 @@
 
         </div>
 
-
         <div class="date">
           📅 Hoje
         </div>
@@ -240,10 +270,9 @@
       </div>
 
 
-      <!-- PRIMEIRA LINHA DE INDICADORES -->
+      <!-- PRIMEIRA LINHA -->
 
       <div class="cards">
-
 
         <!-- PACIENTES -->
 
@@ -387,14 +416,13 @@
       </div>
 
 
-      <!-- SEGUNDA LINHA DE INDICADORES -->
+      <!-- SEGUNDA LINHA -->
 
       <div class="cards">
 
-
-        <!-- EXAMES -->
-
         @if (podeVerExames()) {
+
+          <!-- EXAMES -->
 
           <div
             class="card"
@@ -528,12 +556,11 @@
       </div>
 
 
-      <!-- PAINÉIS PRINCIPAIS -->
+      <!-- PAINÉIS -->
 
       <div class="dashboard-grid">
 
-
-        <!-- PRÓXIMAS CONSULTAS -->
+        <!-- CONSULTAS -->
 
         <div class="panel">
 
@@ -649,7 +676,7 @@
         </div>
 
 
-        <!-- OCUPAÇÃO HOSPITALAR -->
+        <!-- OCUPAÇÃO -->
 
         <div class="panel resumo">
 
@@ -715,11 +742,8 @@
           <div class="bed-row">
 
             <div>
-
               <span class="dot available"></span>
-
               Disponíveis
-
             </div>
 
             <strong>
@@ -732,11 +756,8 @@
           <div class="bed-row">
 
             <div>
-
               <span class="dot occupied"></span>
-
               Ocupados
-
             </div>
 
             <strong>
@@ -749,11 +770,8 @@
           <div class="bed-row">
 
             <div>
-
               <span class="dot maintenance"></span>
-
               Manutenção
-
             </div>
 
             <strong>
@@ -875,9 +893,6 @@
 
       <div class="quick-actions">
 
-
-        <!-- NOVO PACIENTE -->
-
         <button
           type="button"
           (click)="abrirPacientes()"
@@ -901,8 +916,6 @@
 
         </button>
 
-
-        <!-- NOVO MÉDICO -->
 
         @if (podeVerMedicos()) {
 
@@ -932,8 +945,6 @@
         }
 
 
-        <!-- NOVA CONSULTA -->
-
         <button
           type="button"
           (click)="abrirConsultas()"
@@ -957,8 +968,6 @@
 
         </button>
 
-
-        <!-- NOVO EXAME -->
 
         @if (podeVerExames()) {
 
@@ -987,8 +996,6 @@
 
         }
 
-
-        <!-- RELATÓRIOS -->
 
         @if (podeVerRelatorios()) {
 
@@ -1020,7 +1027,7 @@
       </div>
 
 
-      <!-- STATUS DO SISTEMA -->
+      <!-- STATUS -->
 
       <div class="system-info">
 
@@ -1041,7 +1048,6 @@
         </span>
 
       </div>
-
 
     </section>
 

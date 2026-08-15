@@ -11,6 +11,7 @@ import { Exames } from './/exames/exames';
 import { Usuarios } from './/usuarios/usuarios';
 import { Relatorios } from './/relatorios/relatorios';
 
+
 export const routes: Routes = [
 
   {

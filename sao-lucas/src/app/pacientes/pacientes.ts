@@ -67,6 +67,26 @@ export class Pacientes implements OnInit {
       return;
     }
 
+    if (!this.validarCPF(this.cpf)) {
+
+      this.erro = 'Digite um CPF válido.';
+
+      return;
+    }
+
+    const cpfExistente = this.pacientes.some(
+      paciente =>
+        paciente.cpf.replace(/\D/g, '') ===
+        this.cpf.replace(/\D/g, '')
+    );
+
+    if (cpfExistente) {
+
+      this.erro = 'Este CPF já está cadastrado.';
+
+      return;
+    }
+
     const novoPaciente: Paciente = {
 
       id: Date.now(),
@@ -92,6 +112,84 @@ export class Pacientes implements OnInit {
     this.limparFormulario();
 
     this.mostrarFormulario = false;
+
+  }
+
+  validarCPF(cpf: string): boolean {
+
+    const numero = cpf.replace(/\D/g, '');
+
+    if (numero.length !== 11) {
+      return false;
+    }
+
+    if (/^(\d)\1+$/.test(numero)) {
+      return false;
+    }
+
+    let soma = 0;
+
+    for (let i = 0; i < 9; i++) {
+      soma += Number(numero[i]) * (10 - i);
+    }
+
+    let resto = (soma * 10) % 11;
+
+    if (resto === 10) {
+      resto = 0;
+    }
+
+    if (resto !== Number(numero[9])) {
+      return false;
+    }
+
+    soma = 0;
+
+    for (let i = 0; i < 10; i++) {
+      soma += Number(numero[i]) * (11 - i);
+    }
+
+    resto = (soma * 10) % 11;
+
+    if (resto === 10) {
+      resto = 0;
+    }
+
+    return resto === Number(numero[10]);
+  }
+
+  formatarCPF() {
+
+    let valor = this.cpf.replace(/\D/g, '');
+
+    valor = valor.substring(0, 11);
+
+    if (valor.length > 9) {
+
+      this.cpf =
+        valor.substring(0, 3) + '.' +
+        valor.substring(3, 6) + '.' +
+        valor.substring(6, 9) + '-' +
+        valor.substring(9, 11);
+
+    } else if (valor.length > 6) {
+
+      this.cpf =
+        valor.substring(0, 3) + '.' +
+        valor.substring(3, 6) + '.' +
+        valor.substring(6);
+
+    } else if (valor.length > 3) {
+
+      this.cpf =
+        valor.substring(0, 3) + '.' +
+        valor.substring(3);
+
+    } else {
+
+      this.cpf = valor;
+
+    }
 
   }
 

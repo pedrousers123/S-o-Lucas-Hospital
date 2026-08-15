@@ -17,8 +17,8 @@
 
 .form-control:focus,
 .form-select:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.15);
+  border-color: #1769aa35;
+  box-shadow: 0 0 0 0.2rem rgba(23, 105, 170, 0.15);
 }
 
 .medico-item {

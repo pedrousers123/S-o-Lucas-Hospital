@@ -19,6 +19,8 @@ export class Dashboard implements OnInit {
   exames = 0;
   examesPendentes = 0;
 
+  notificacoesAbertas = false;
+
   leitosTotal = 50;
   leitosOcupados = 0;
   leitosManutencao = 0;
@@ -142,6 +144,16 @@ export class Dashboard implements OnInit {
     return this.listaExames
       .slice(-4)
       .reverse();
+  }
+
+
+  /* NOTIFICAÇÕES */
+
+  abrirNotificacoes(): void {
+
+    this.notificacoesAbertas =
+      !this.notificacoesAbertas;
+
   }
 
 

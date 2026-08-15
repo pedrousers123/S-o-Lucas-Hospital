@@ -1,1 +1,118 @@
-/* You can add global styles to this file, and also import other style files */
+/* RESPONSIVIDADE PARA CELULAR */
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .dashboard {
+    display: block !important;
+  }
+
+  .sidebar {
+    width: 100% !important;
+    min-height: auto !important;
+    position: relative !important;
+  }
+
+  .main {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .topbar {
+    padding: 20px !important;
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 15px;
+  }
+
+  .user-area {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .content {
+    padding: 15px !important;
+  }
+
+  .cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .quick-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .panel {
+    width: 100%;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+
+  .see-all {
+    width: 100%;
+  }
+
+}
+
+
+/* CELULARES PEQUENOS */
+
+@media (max-width: 480px) {
+
+  .content {
+    padding: 12px !important;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .topbar {
+    padding: 15px !important;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .appointment {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .appointment-info {
+    min-width: 0;
+  }
+
+  .badge {
+    font-size: 11px;
+  }
+
+  .quick-actions button {
+    width: 100%;
+  }
+
+}
