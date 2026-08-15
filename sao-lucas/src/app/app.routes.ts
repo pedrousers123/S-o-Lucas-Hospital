@@ -9,6 +9,7 @@ import { Consultas } from './pages/medicos/consultas/consultas';
 import { Internacoes } from './/internacoes/internacoes';
 import { Exames } from './/exames/exames';
 import { Usuarios } from './/usuarios/usuarios';
+import { Relatorios } from './/relatorios/relatorios';
 
 export const routes: Routes = [
 
@@ -59,5 +60,8 @@ export const routes: Routes = [
   {
   path: 'usuarios',
     component: Usuarios
-  } 
+  },
+  {path: 'relatorios',
+    component: Relatorios
+  }
 ];

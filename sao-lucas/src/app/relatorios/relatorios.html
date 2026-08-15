@@ -1,0 +1,190 @@
+<div class="relatorios">
+
+  <header>
+    <div>
+      <h1>📊 Relatórios</h1>
+      <p>Indicadores do Hospital São Lucas</p>
+    </div>
+
+    <button (click)="voltarDashboard()">
+      ← Dashboard
+    </button>
+  </header>
+
+
+  <!-- INDICADORES -->
+
+  <div class="cards">
+
+    <div class="card">
+      <span>👥 Pacientes</span>
+      <strong>{{ pacientes }}</strong>
+      <small>cadastrados</small>
+    </div>
+
+    <div class="card">
+      <span>👨‍⚕️ Médicos</span>
+      <strong>{{ medicos }}</strong>
+      <small>profissionais</small>
+    </div>
+
+    <div class="card">
+      <span>📅 Consultas</span>
+      <strong>{{ consultas }}</strong>
+      <small>registradas</small>
+    </div>
+
+    <div class="card">
+      <span>🏥 Internações</span>
+      <strong>{{ internacoes }}</strong>
+      <small>ativas</small>
+    </div>
+
+  </div>
+
+
+  <!-- GRÁFICO -->
+
+  <div class="area">
+
+    <div class="grafico">
+
+      <h2>Status das consultas</h2>
+      <p>Distribuição dos atendimentos</p>
+
+      <div class="barra">
+        <label>
+          Agendadas
+          <b>{{ agendadas }}</b>
+        </label>
+
+        <div>
+          <span
+            class="azul"
+            [style.width.%]="consultas ? agendadas / consultas * 100 : 0">
+          </span>
+        </div>
+      </div>
+
+
+      <div class="barra">
+        <label>
+          Realizadas
+          <b>{{ realizadas }}</b>
+        </label>
+
+        <div>
+          <span
+            class="verde"
+            [style.width.%]="consultas ? realizadas / consultas * 100 : 0">
+          </span>
+        </div>
+      </div>
+
+
+      <div class="barra">
+        <label>
+          Canceladas
+          <b>{{ canceladas }}</b>
+        </label>
+
+        <div>
+          <span
+            class="vermelho"
+            [style.width.%]="consultas ? canceladas / consultas * 100 : 0">
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- OCUPAÇÃO -->
+
+    <div class="ocupacao">
+
+      <h2>Ocupação hospitalar</h2>
+      <p>Leitos ocupados atualmente</p>
+
+      <div
+        class="circulo"
+        [style.--ocupacao]="ocupacao + '%'">
+
+        <strong>{{ ocupacao }}%</strong>
+        <small>ocupado</small>
+
+      </div>
+
+      <div class="leitos">
+
+        <p>
+          🟦 Ocupados
+          <b>{{ leitosOcupados }}</b>
+        </p>
+
+        <p>
+          🟩 Disponíveis
+          <b>{{ leitosDisponiveis }}</b>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- INTERNAÇÕES -->
+
+  <div class="painel">
+
+    <h2>Situação das internações</h2>
+    <p>Estado atual dos pacientes</p>
+
+    <div class="status">
+
+      <div class="status-card verde-fundo">
+        <strong>{{ estaveis }}</strong>
+        <span>Estáveis</span>
+      </div>
+
+      <div class="status-card amarelo-fundo">
+        <strong>{{ observacao }}</strong>
+        <span>Em observação</span>
+      </div>
+
+      <div class="status-card vermelho-fundo">
+        <strong>{{ criticos }}</strong>
+        <span>Críticos</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RESUMO -->
+
+  <div class="resumo">
+
+    <div>
+      🧪
+      <span>Exames</span>
+      <strong>{{ exames }}</strong>
+    </div>
+
+    <div>
+      ⚠️
+      <span>Exames pendentes</span>
+      <strong>{{ examesPendentes }}</strong>
+    </div>
+
+    <div>
+      🛏️
+      <span>Leitos disponíveis</span>
+      <strong>{{ leitosDisponiveis }}</strong>
+    </div>
+
+  </div>
+
+</div>

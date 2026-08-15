@@ -26,20 +26,35 @@ export class Cadastro {
     this.mensagem = '';
 
     if (!this.nome || !this.email || !this.senha) {
-
       this.erro = 'Preencha todos os campos.';
-
       return;
     }
 
     if (this.senha.length < 6) {
-
       this.erro = 'A senha deve ter pelo menos 6 caracteres.';
-
       return;
     }
 
-    const usuario = {
+    const dados = localStorage.getItem('usuarios');
+
+    const usuarios = dados
+      ? JSON.parse(dados)
+      : [];
+
+    const emailExiste = usuarios.some(
+      (usuario: any) =>
+        usuario.email.toLowerCase() ===
+        this.email.toLowerCase()
+    );
+
+    if (emailExiste) {
+      this.erro = 'Este e-mail já está cadastrado.';
+      return;
+    }
+
+    const novoUsuario = {
+
+      id: Date.now(),
 
       nome: this.nome,
 
@@ -51,12 +66,18 @@ export class Cadastro {
 
     };
 
+    usuarios.push(novoUsuario);
+
     localStorage.setItem(
-      'usuarioCadastro',
-      JSON.stringify(usuario)
+      'usuarios',
+      JSON.stringify(usuarios)
     );
 
     this.mensagem = 'Conta criada com sucesso!';
+
+    this.nome = '';
+    this.email = '';
+    this.senha = '';
 
     setTimeout(() => {
 

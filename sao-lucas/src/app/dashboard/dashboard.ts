@@ -1,56 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
 export class Dashboard implements OnInit {
 
-  nomeUsuario = 'Administrador';
-  tipoUsuario = 'Administrador';
+  nomeUsuario = '';
+  tipoUsuario = '';
 
   pacientes = 0;
   medicos = 0;
   consultasHoje = 0;
   internacoes = 0;
-
   exames = 0;
   examesPendentes = 0;
 
-  totalLeitos = 50;
-  leitosOcupados = 35;
-  leitosDisponiveis = 10;
-  leitosReservados = 3;
-  leitosManutencao = 2;
+  leitosTotal = 50;
+  leitosOcupados = 0;
+  leitosManutencao = 0;
 
-  porcentagemOcupacao = 0;
+  consultas: any[] = [];
+  listaExames: any[] = [];
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.carregarUsuario();
     this.carregarDados();
-    this.calcularOcupacao();
   }
 
   carregarUsuario(): void {
 
     const dados = localStorage.getItem('usuarioLogado');
 
-    if (dados) {
-
-      const usuario = JSON.parse(dados);
-
-      this.nomeUsuario = usuario.nome;
-      this.tipoUsuario = usuario.tipo;
-
+    if (!dados) {
+      this.router.navigate(['/login']);
+      return;
     }
 
+    const usuario = JSON.parse(dados);
+
+    this.nomeUsuario = usuario.nome;
+    this.tipoUsuario = usuario.tipo;
   }
 
   carregarDados(): void {
@@ -61,82 +56,189 @@ export class Dashboard implements OnInit {
     const internacoes = localStorage.getItem('internacoes');
     const exames = localStorage.getItem('exames');
 
-    if (pacientes) {
-      this.pacientes = JSON.parse(pacientes).length;
-    }
+    this.pacientes = pacientes
+      ? JSON.parse(pacientes).length
+      : 0;
 
-    if (medicos) {
-      this.medicos = JSON.parse(medicos).length;
-    }
+    this.medicos = medicos
+      ? JSON.parse(medicos).length
+      : 0;
 
     if (consultas) {
-      this.consultasHoje = JSON.parse(consultas).length;
+
+      this.consultas = JSON.parse(consultas);
+
+      const hoje = new Date()
+        .toISOString()
+        .split('T')[0];
+
+      this.consultasHoje = this.consultas.filter(
+        consulta =>
+          consulta.data === hoje &&
+          consulta.status !== 'Cancelada'
+      ).length;
     }
 
     if (internacoes) {
-      this.internacoes = JSON.parse(internacoes).length;
+
+      const lista = JSON.parse(internacoes);
+
+      this.internacoes = lista.length;
+      this.leitosOcupados = lista.length;
     }
 
     if (exames) {
 
-      const listaExames = JSON.parse(exames);
+      this.listaExames = JSON.parse(exames);
 
-      this.exames = listaExames.length;
+      this.exames = this.listaExames.length;
 
-      this.examesPendentes = listaExames.filter(
-        (exame: any) => exame.status === 'Pendente'
-      ).length;
-
+      this.examesPendentes =
+        this.listaExames.filter(
+          exame =>
+            exame.status === 'Pendente' ||
+            exame.status === 'Aguardando resultado'
+        ).length;
     }
-
   }
 
-  calcularOcupacao(): void {
 
-    if (this.totalLeitos > 0) {
+  get leitosDisponiveis(): number {
 
-      this.porcentagemOcupacao = Math.round(
-        (this.leitosOcupados / this.totalLeitos) * 100
-      );
+    return Math.max(
+      0,
+      this.leitosTotal -
+      this.leitosOcupados -
+      this.leitosManutencao
+    );
+  }
 
+
+  get ocupacao(): number {
+
+    if (this.leitosTotal === 0) {
+      return 0;
     }
 
+    return Math.round(
+      (this.leitosOcupados / this.leitosTotal) * 100
+    );
   }
+
+
+  get proximasConsultas(): any[] {
+
+    return this.consultas
+      .filter(
+        consulta =>
+          consulta.status !== 'Cancelada'
+      )
+      .slice(0, 4);
+  }
+
+
+  get examesRecentes(): any[] {
+
+    return this.listaExames
+      .slice(-4)
+      .reverse();
+  }
+
+
+  /* PERMISSÕES */
+
+  podeVerMedicos(): boolean {
+
+    return this.tipoUsuario === 'Administrador';
+  }
+
+
+  podeVerExames(): boolean {
+
+    return (
+      this.tipoUsuario === 'Administrador' ||
+      this.tipoUsuario === 'Médico'
+    );
+  }
+
+
+  podeVerRelatorios(): boolean {
+
+    return (
+      this.tipoUsuario === 'Administrador' ||
+      this.tipoUsuario === 'Médico'
+    );
+  }
+
+
+  podeVerUsuarios(): boolean {
+
+    return this.tipoUsuario === 'Administrador';
+  }
+
+
+  /* NAVEGAÇÃO */
 
   abrirPacientes(): void {
     this.router.navigate(['/pacientes']);
   }
 
+
   abrirMedicos(): void {
+
+    if (!this.podeVerMedicos()) {
+      return;
+    }
+
     this.router.navigate(['/medicos']);
   }
+
 
   abrirConsultas(): void {
     this.router.navigate(['/consultas']);
   }
 
+
   abrirInternacoes(): void {
     this.router.navigate(['/internacoes']);
   }
 
+
   abrirExames(): void {
+
+    if (!this.podeVerExames()) {
+      return;
+    }
+
     this.router.navigate(['/exames']);
   }
 
+
+  abrirRelatorios(): void {
+
+    if (!this.podeVerRelatorios()) {
+      return;
+    }
+
+    this.router.navigate(['/relatorios']);
+  }
+
+
   abrirUsuarios(): void {
+
+    if (!this.podeVerUsuarios()) {
+      return;
+    }
+
     this.router.navigate(['/usuarios']);
   }
 
-  abrirConfiguracoes(): void {
-    this.router.navigate(['/configuracoes']);
-  }
 
   voltarLogin(): void {
 
     localStorage.removeItem('usuarioLogado');
 
     this.router.navigate(['/login']);
-
   }
 
 }

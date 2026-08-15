@@ -4,102 +4,205 @@
   <aside class="sidebar">
 
     <div class="logo">
-      <b>+</b>
+      <div class="logo-icon">+</div>
 
-      <span>
-        São Lucas
+      <div>
+        <strong>São Lucas</strong>
         <small>Hospital</small>
-      </span>
+      </div>
     </div>
 
-    <p>PRINCIPAL</p>
+    <div class="menu-title">
+      PRINCIPAL
+    </div>
 
-    <button class="menu active">
-      ▦ Dashboard
-    </button>
+    <nav class="menu">
 
-    <!-- PACIENTES -->
-    <button class="menu" (click)="abrirPacientes()">
-      👥 Pacientes
-    </button>
-
-    <!-- MÉDICOS - SOMENTE ADMIN -->
-    @if (tipoUsuario === 'Administrador') {
-      <button class="menu" (click)="abrirMedicos()">
-        👨‍⚕️ Médicos
+      <!-- DASHBOARD -->
+      <button
+        type="button"
+        class="menu-button active"
+      >
+        <span class="icon">▦</span>
+        <span>Dashboard</span>
       </button>
-    }
 
-    <!-- CONSULTAS -->
-    <button class="menu" (click)="abrirConsultas()">
-      📅 Consultas
-    </button>
 
-    <!-- INTERNAÇÕES -->
-    <button class="menu" (click)="abrirInternacoes()">
-      🏥 Internações
-    </button>
-
-    <!-- EXAMES -->
-    <button class="menu" (click)="abrirExames()">
-      🧪 Exames
-    </button>
-
-    <!-- USUÁRIOS - SOMENTE ADMIN -->
-    @if (tipoUsuario === 'Administrador') {
-      <button class="menu" (click)="abrirUsuarios()">
-        👤 Usuários
+      <!-- PACIENTES -->
+      <button
+        type="button"
+        class="menu-button"
+        (click)="abrirPacientes()"
+      >
+        <span class="icon">👥</span>
+        <span>Pacientes</span>
       </button>
-    }
 
 
-    <p>SISTEMA</p>
+      <!-- MÉDICOS -->
+      @if (podeVerMedicos()) {
 
-    <!-- CONFIGURAÇÕES - SOMENTE ADMIN -->
-    @if (tipoUsuario === 'Administrador') {
-      <button class="menu" (click)="abrirConfiguracoes()">
-        ⚙ Configurações
+        <button
+          type="button"
+          class="menu-button"
+          (click)="abrirMedicos()"
+        >
+          <span class="icon">👨‍⚕️</span>
+          <span>Médicos</span>
+        </button>
+
+      }
+
+
+      <!-- CONSULTAS -->
+      <button
+        type="button"
+        class="menu-button"
+        (click)="abrirConsultas()"
+      >
+        <span class="icon">📅</span>
+        <span>Consultas</span>
       </button>
-    }
 
-    <button class="sair" (click)="voltarLogin()">
-      ⇥ Sair
-    </button>
+
+      <!-- INTERNAÇÕES -->
+      <button
+        type="button"
+        class="menu-button"
+        (click)="abrirInternacoes()"
+      >
+        <span class="icon">🏥</span>
+        <span>Internações</span>
+      </button>
+
+
+      <!-- EXAMES -->
+      @if (podeVerExames()) {
+
+        <button
+          type="button"
+          class="menu-button"
+          (click)="abrirExames()"
+        >
+          <span class="icon">🧪</span>
+          <span>Exames</span>
+        </button>
+
+      }
+
+
+      <!-- RELATÓRIOS -->
+      @if (podeVerRelatorios()) {
+
+        <button
+          type="button"
+          class="menu-button"
+          (click)="abrirRelatorios()"
+        >
+          <span class="icon">📊</span>
+          <span>Relatórios</span>
+        </button>
+
+      }
+
+    </nav>
+
+
+    <!-- SISTEMA -->
+
+    <div class="menu-title sistema">
+      SISTEMA
+    </div>
+
+    <nav class="menu">
+
+      <!-- USUÁRIOS -->
+      @if (podeVerUsuarios()) {
+
+        <button
+          type="button"
+          class="menu-button"
+          (click)="abrirUsuarios()"
+        >
+          <span class="icon">👤</span>
+          <span>Usuários</span>
+        </button>
+
+      }
+
+    </nav>
+
+
+    <!-- SAIR -->
+
+    <div class="sidebar-bottom">
+
+      <button
+        type="button"
+        class="logout"
+        (click)="voltarLogin()"
+      >
+        <span>⇥</span>
+        <span>Sair</span>
+      </button>
+
+    </div>
 
   </aside>
 
 
-  <!-- CONTEÚDO -->
-  <main>
+  <!-- ÁREA PRINCIPAL -->
 
-    <!-- HEADER -->
-    <header>
+  <main class="main">
+
+
+    <!-- TOPO -->
+
+    <header class="topbar">
 
       <div>
-        <h1>Dashboard</h1>
 
-        <small>
+        <h1>
+          Dashboard
+        </h1>
+
+        <p>
           Visão geral do Hospital São Lucas
-        </small>
+        </p>
+
       </div>
 
 
-      <!-- USUÁRIO LOGADO -->
-      <div class="usuario">
+      <div class="user-area">
 
-        <span>🔔</span>
+        <div class="notification">
 
-        <b>A</b>
+          🔔
 
-        <div>
+          <span>
+            {{ examesPendentes }}
+          </span>
 
-          <strong>
-            {{ nomeUsuario }}
-          </strong>
+        </div>
 
-          <small>
-            {{ tipoUsuario }}
-          </small>
+
+        <div class="user">
+
+          <div class="avatar">
+            {{ nomeUsuario.charAt(0).toUpperCase() }}
+          </div>
+
+          <div class="user-info">
+
+            <strong>
+              {{ nomeUsuario }}
+            </strong>
+
+            <small>
+              {{ tipoUsuario }}
+            </small>
+
+          </div>
 
         </div>
 
@@ -108,51 +211,64 @@
     </header>
 
 
-    <section class="conteudo">
+    <!-- CONTEÚDO -->
+
+    <section class="content">
 
 
       <!-- BOAS-VINDAS -->
-      <div class="boas-vindas">
+
+      <div class="welcome">
 
         <div>
-
-          <span>
-            PAINEL ADMINISTRATIVO
-          </span>
 
           <h2>
             Olá, {{ nomeUsuario }} 👋
           </h2>
 
           <p>
-            Aqui está o resumo do hospital hoje.
+            Aqui está o resumo do hospital.
           </p>
 
         </div>
 
-        <label>
+
+        <div class="date">
           📅 Hoje
-        </label>
+        </div>
 
       </div>
 
 
-      <!-- CARDS -->
+      <!-- PRIMEIRA LINHA DE INDICADORES -->
+
       <div class="cards">
 
 
         <!-- PACIENTES -->
+
         <div
           class="card"
-          (click)="abrirPacientes()">
+          (click)="abrirPacientes()"
+        >
 
-          <i>👥</i>
+          <div class="card-top">
 
-          <span>
+            <div class="card-icon blue">
+              👥
+            </div>
+
+            <span class="card-status">
+              Total
+            </span>
+
+          </div>
+
+          <span class="card-label">
             Pacientes
           </span>
 
-          <strong>
+          <strong class="card-number">
             {{ pacientes }}
           </strong>
 
@@ -163,20 +279,32 @@
         </div>
 
 
-        <!-- MÉDICOS - SOMENTE ADMIN -->
-        @if (tipoUsuario === 'Administrador') {
+        <!-- MÉDICOS -->
+
+        @if (podeVerMedicos()) {
 
           <div
             class="card"
-            (click)="abrirMedicos()">
+            (click)="abrirMedicos()"
+          >
 
-            <i>👨‍⚕️</i>
+            <div class="card-top">
 
-            <span>
+              <div class="card-icon green">
+                👨‍⚕️
+              </div>
+
+              <span class="card-status">
+                Total
+              </span>
+
+            </div>
+
+            <span class="card-label">
               Médicos
             </span>
 
-            <strong>
+            <strong class="card-number">
               {{ medicos }}
             </strong>
 
@@ -190,39 +318,63 @@
 
 
         <!-- CONSULTAS -->
+
         <div
           class="card"
-          (click)="abrirConsultas()">
+          (click)="abrirConsultas()"
+        >
 
-          <i>📅</i>
+          <div class="card-top">
 
-          <span>
+            <div class="card-icon orange">
+              📅
+            </div>
+
+            <span class="card-status">
+              Hoje
+            </span>
+
+          </div>
+
+          <span class="card-label">
             Consultas
           </span>
 
-          <strong>
+          <strong class="card-number">
             {{ consultasHoje }}
           </strong>
 
           <small>
-            atendimentos hoje
+            consultas hoje
           </small>
 
         </div>
 
 
         <!-- INTERNAÇÕES -->
+
         <div
           class="card"
-          (click)="abrirInternacoes()">
+          (click)="abrirInternacoes()"
+        >
 
-          <i>🏥</i>
+          <div class="card-top">
 
-          <span>
+            <div class="card-icon purple">
+              🏥
+            </div>
+
+            <span class="card-status">
+              Atual
+            </span>
+
+          </div>
+
+          <span class="card-label">
             Internações
           </span>
 
-          <strong>
+          <strong class="card-number">
             {{ internacoes }}
           </strong>
 
@@ -232,46 +384,143 @@
 
         </div>
 
+      </div>
+
+
+      <!-- SEGUNDA LINHA DE INDICADORES -->
+
+      <div class="cards">
+
 
         <!-- EXAMES -->
-        <div
-          class="card"
-          (click)="abrirExames()">
 
-          <i>🧪</i>
+        @if (podeVerExames()) {
 
-          <span>
-            Exames
+          <div
+            class="card"
+            (click)="abrirExames()"
+          >
+
+            <div class="card-top">
+
+              <div class="card-icon blue">
+                🧪
+              </div>
+
+              <span class="card-status">
+                Total
+              </span>
+
+            </div>
+
+            <span class="card-label">
+              Exames
+            </span>
+
+            <strong class="card-number">
+              {{ exames }}
+            </strong>
+
+            <small>
+              exames cadastrados
+            </small>
+
+          </div>
+
+
+          <!-- EXAMES PENDENTES -->
+
+          <div
+            class="card"
+            (click)="abrirExames()"
+          >
+
+            <div class="card-top">
+
+              <div class="card-icon orange">
+                ⚠️
+              </div>
+
+              <span class="card-status">
+                Atenção
+              </span>
+
+            </div>
+
+            <span class="card-label">
+              Exames pendentes
+            </span>
+
+            <strong class="card-number">
+              {{ examesPendentes }}
+            </strong>
+
+            <small>
+              aguardando resultado
+            </small>
+
+          </div>
+
+        }
+
+
+        <!-- LEITOS OCUPADOS -->
+
+        <div class="card">
+
+          <div class="card-top">
+
+            <div class="card-icon purple">
+              🛏️
+            </div>
+
+            <span class="card-status">
+              Ocupados
+            </span>
+
+          </div>
+
+          <span class="card-label">
+            Leitos ocupados
           </span>
 
-          <strong>
-            {{ exames }}
+          <strong class="card-number">
+            {{ leitosOcupados }}
           </strong>
 
           <small>
-            exames cadastrados
+            pacientes internados
           </small>
 
         </div>
 
 
-        <!-- EXAMES PENDENTES -->
-        <div
-          class="card"
-          (click)="abrirExames()">
+        <!-- LEITOS DISPONÍVEIS -->
 
-          <i>⏳</i>
+        <div class="card">
 
-          <span>
-            Exames pendentes
+          <div class="card-top">
+
+            <div class="card-icon green">
+              🟢
+            </div>
+
+            <span class="card-status">
+              Disponíveis
+            </span>
+
+          </div>
+
+          <span class="card-label">
+            Leitos disponíveis
           </span>
 
-          <strong>
-            {{ examesPendentes }}
+          <strong class="card-number">
+            {{ leitosDisponiveis }}
           </strong>
 
           <small>
-            aguardando realização
+            capacidade disponível
           </small>
 
         </div>
@@ -279,367 +528,237 @@
       </div>
 
 
-      <!-- PAINÉIS -->
-      <div class="grid">
+      <!-- PAINÉIS PRINCIPAIS -->
+
+      <div class="dashboard-grid">
 
 
-        <!-- CONSULTAS -->
-        <div class="painel">
+        <!-- PRÓXIMAS CONSULTAS -->
 
-          <div class="titulo">
+        <div class="panel">
+
+          <div class="panel-header">
 
             <div>
-
-              <span>
-                AGENDA
-              </span>
 
               <h3>
                 Próximas consultas
               </h3>
 
-              <small>
-                Atendimentos de hoje
-              </small>
+              <p>
+                Consultas cadastradas no sistema
+              </p>
 
             </div>
 
             <button
-              (click)="abrirConsultas()">
-
+              type="button"
+              class="see-all"
+              (click)="abrirConsultas()"
+            >
               Ver agenda →
-
             </button>
 
           </div>
 
 
-          <div class="consulta">
+          @if (proximasConsultas.length > 0) {
 
-            <b>
-              09:00
-            </b>
+            @for (
+              consulta of proximasConsultas;
+              track consulta.id
+            ) {
 
-            <i>
-              MS
-            </i>
+              <div class="appointment">
 
-            <div>
+                <div class="appointment-time">
+
+                  <strong>
+                    {{ consulta.horario }}
+                  </strong>
+
+                  <small>
+                    {{ consulta.data }}
+                  </small>
+
+                </div>
+
+
+                <div class="patient-avatar">
+
+                  {{
+                    consulta.paciente
+                      .substring(0, 2)
+                      .toUpperCase()
+                  }}
+
+                </div>
+
+
+                <div class="appointment-info">
+
+                  <strong>
+                    {{ consulta.paciente }}
+                  </strong>
+
+                  <small>
+                    {{ consulta.medico }}
+                    ·
+                    {{ consulta.tipo }}
+                  </small>
+
+                </div>
+
+
+                <span class="badge blue-badge">
+                  {{ consulta.status }}
+                </span>
+
+              </div>
+
+            }
+
+          } @else {
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                📅
+              </div>
 
               <strong>
-                Maria Silva
+                Nenhuma consulta cadastrada
               </strong>
 
               <small>
-                Dr. Carlos · Cardiologia
+                As consultas aparecerão aqui.
               </small>
+
+              <button
+                type="button"
+                class="empty-button"
+                (click)="abrirConsultas()"
+              >
+                Agendar consulta
+              </button>
 
             </div>
 
-            <label>
-              Confirmada
-            </label>
-
-          </div>
-
-
-          <div class="consulta">
-
-            <b>
-              10:30
-            </b>
-
-            <i>
-              JS
-            </i>
-
-            <div>
-
-              <strong>
-                João Santos
-              </strong>
-
-              <small>
-                Dra. Ana · Clínica Geral
-              </small>
-
-            </div>
-
-            <label>
-              Aguardando
-            </label>
-
-          </div>
-
-
-          <div class="consulta">
-
-            <b>
-              14:00
-            </b>
-
-            <i>
-              AC
-            </i>
-
-            <div>
-
-              <strong>
-                Ana Carvalho
-              </strong>
-
-              <small>
-                Dr. Pedro · Ortopedia
-              </small>
-
-            </div>
-
-            <label>
-              Confirmada
-            </label>
-
-          </div>
-
-
-          <div class="consulta">
-
-            <b>
-              16:30
-            </b>
-
-            <i>
-              RM
-            </i>
-
-            <div>
-
-              <strong>
-                Rafael Martins
-              </strong>
-
-              <small>
-                Dra. Juliana · Neurologia
-              </small>
-
-            </div>
-
-            <label>
-              Confirmada
-            </label>
-
-          </div>
+          }
 
         </div>
 
 
-        <!-- OCUPAÇÃO DOS LEITOS -->
-        <div class="painel">
+        <!-- OCUPAÇÃO HOSPITALAR -->
 
-          <div class="titulo">
+        <div class="panel resumo">
+
+          <div class="panel-header">
 
             <div>
-
-              <span>
-                LEITOS
-              </span>
 
               <h3>
                 Ocupação hospitalar
               </h3>
 
-              <small>
+              <p>
                 Situação atual dos leitos
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="see-all"
+              (click)="abrirInternacoes()"
+            >
+              Ver internações →
+            </button>
+
+          </div>
+
+
+          <div class="occupancy">
+
+            <div class="occupancy-number">
+              {{ ocupacao }}%
+            </div>
+
+            <div class="occupancy-text">
+
+              <strong>
+                Ocupação total
+              </strong>
+
+              <small>
+                {{ leitosOcupados }}
+                de
+                {{ leitosTotal }}
+                leitos ocupados
               </small>
 
             </div>
 
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar"
+              [style.width.%]="ocupacao"
+            ></div>
+
+          </div>
+
+
+          <div class="bed-row">
+
+            <div>
+
+              <span class="dot available"></span>
+
+              Disponíveis
+
+            </div>
+
             <strong>
-              {{ porcentagemOcupacao }}%
+              {{ leitosDisponiveis }}
             </strong>
 
           </div>
 
 
-          <div class="ocupacao">
-
-            <div class="circulo">
-
-              {{ porcentagemOcupacao }}%
-
-              <small>
-                ocupação
-              </small>
-
-            </div>
-
+          <div class="bed-row">
 
             <div>
 
-              <strong>
-                {{ leitosOcupados }} de {{ totalLeitos }}
-              </strong>
+              <span class="dot occupied"></span>
 
-              <p>
-                leitos ocupados
-              </p>
-
-              <small>
-                {{ leitosDisponiveis }} disponíveis
-              </small>
+              Ocupados
 
             </div>
+
+            <strong>
+              {{ leitosOcupados }}
+            </strong>
 
           </div>
 
 
-          <div class="barra">
-
-            <div
-              [style.width.%]="porcentagemOcupacao">
-            </div>
-
-          </div>
-
-
-          <!-- LEITOS -->
-          <div class="leitos">
+          <div class="bed-row">
 
             <div>
 
-              🟢
+              <span class="dot maintenance"></span>
 
-              <strong>
-                {{ leitosDisponiveis }}
-              </strong>
-
-              <small>
-                Disponíveis
-              </small>
+              Manutenção
 
             </div>
 
-
-            <div>
-
-              🔵
-
-              <strong>
-                {{ leitosOcupados }}
-              </strong>
-
-              <small>
-                Ocupados
-              </small>
-
-            </div>
-
-
-            <div>
-
-              🟡
-
-              <strong>
-                {{ leitosReservados }}
-              </strong>
-
-              <small>
-                Reservados
-              </small>
-
-            </div>
-
-
-            <div>
-
-              🔴
-
-              <strong>
-                {{ leitosManutencao }}
-              </strong>
-
-              <small>
-                Manutenção
-              </small>
-
-            </div>
-
-          </div>
-
-
-          <h4>
-            Ocupação por setor
-          </h4>
-
-
-          <!-- UTI -->
-          <div class="setor">
-
-            <span>
-              UTI
-              <b>92%</b>
-            </span>
-
-            <div>
-              <i style="width:92%"></i>
-            </div>
-
-          </div>
-
-
-          <!-- ENFERMARIA -->
-          <div class="setor">
-
-            <span>
-              Enfermaria
-              <b>74%</b>
-            </span>
-
-            <div>
-              <i style="width:74%"></i>
-            </div>
-
-          </div>
-
-
-          <!-- PEDIATRIA -->
-          <div class="setor">
-
-            <span>
-              Pediatria
-              <b>61%</b>
-            </span>
-
-            <div>
-              <i style="width:61%"></i>
-            </div>
-
-          </div>
-
-
-          <!-- APARTAMENTOS -->
-          <div class="setor">
-
-            <span>
-              Apartamentos
-              <b>58%</b>
-            </span>
-
-            <div>
-              <i style="width:58%"></i>
-            </div>
-
-          </div>
-
-
-          <div class="alerta">
-
-            ⚠
-
-            <b>
-              Atenção:
-            </b>
-
-            UTI acima de 90%.
+            <strong>
+              {{ leitosManutencao }}
+            </strong>
 
           </div>
 
@@ -648,59 +767,165 @@
       </div>
 
 
+      <!-- EXAMES RECENTES -->
+
+      @if (podeVerExames()) {
+
+        <div class="panel exames-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h3>
+                Exames recentes
+              </h3>
+
+              <p>
+                Últimos exames cadastrados
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="see-all"
+              (click)="abrirExames()"
+            >
+              Ver exames →
+            </button>
+
+          </div>
+
+
+          @if (examesRecentes.length > 0) {
+
+            @for (
+              exame of examesRecentes;
+              track exame.id
+            ) {
+
+              <div class="exam-row">
+
+                <div class="exam-icon">
+                  🧪
+                </div>
+
+                <div class="exam-info">
+
+                  <strong>
+                    {{ exame.tipo }}
+                  </strong>
+
+                  <small>
+                    {{ exame.paciente }}
+                    ·
+                    {{ exame.medico }}
+                  </small>
+
+                </div>
+
+                <span class="badge blue-badge">
+                  {{ exame.status }}
+                </span>
+
+              </div>
+
+            }
+
+          } @else {
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                🧪
+              </div>
+
+              <strong>
+                Nenhum exame cadastrado
+              </strong>
+
+              <small>
+                Os exames aparecerão aqui.
+              </small>
+
+              <button
+                type="button"
+                class="empty-button"
+                (click)="abrirExames()"
+              >
+                Cadastrar exame
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+
       <!-- ACESSO RÁPIDO -->
-      <h3 class="atalhos">
+
+      <div class="quick-title">
         Acesso rápido
-      </h3>
+      </div>
 
 
-      <div class="acoes">
+      <div class="quick-actions">
 
 
         <!-- NOVO PACIENTE -->
-        <button
-          (click)="abrirPacientes()">
 
-          👥
+        <button
+          type="button"
+          (click)="abrirPacientes()"
+        >
 
           <span>
+            👥
+          </span>
 
-            <b>
+          <div>
+
+            <strong>
               Novo paciente
-            </b>
+            </strong>
 
             <small>
               Cadastrar paciente
             </small>
 
-          </span>
-
-          →
+          </div>
 
         </button>
 
 
-        <!-- NOVO MÉDICO - SOMENTE ADMIN -->
-        @if (tipoUsuario === 'Administrador') {
+        <!-- NOVO MÉDICO -->
+
+        @if (podeVerMedicos()) {
 
           <button
-            (click)="abrirMedicos()">
-
-            👨‍⚕️
+            type="button"
+            (click)="abrirMedicos()"
+          >
 
             <span>
+              👨‍⚕️
+            </span>
 
-              <b>
+            <div>
+
+              <strong>
                 Novo médico
-              </b>
+              </strong>
 
               <small>
                 Cadastrar profissional
               </small>
 
-            </span>
-
-            →
+            </div>
 
           </button>
 
@@ -708,101 +933,115 @@
 
 
         <!-- NOVA CONSULTA -->
-        <button
-          (click)="abrirConsultas()">
 
-          📅
+        <button
+          type="button"
+          (click)="abrirConsultas()"
+        >
 
           <span>
+            📅
+          </span>
 
-            <b>
+          <div>
+
+            <strong>
               Nova consulta
-            </b>
+            </strong>
 
             <small>
               Agendar atendimento
             </small>
 
-          </span>
-
-          →
-
-        </button>
-
-
-        <!-- NOVA INTERNAÇÃO -->
-        <button
-          (click)="abrirInternacoes()">
-
-          🏥
-
-          <span>
-
-            <b>
-              Nova internação
-            </b>
-
-            <small>
-              Internar paciente
-            </small>
-
-          </span>
-
-          →
+          </div>
 
         </button>
 
 
         <!-- NOVO EXAME -->
-        <button
-          (click)="abrirExames()">
 
-          🧪
-
-          <span>
-
-            <b>
-              Novo exame
-            </b>
-
-            <small>
-              Cadastrar exame
-            </small>
-
-          </span>
-
-          →
-
-        </button>
-
-
-        <!-- USUÁRIOS - SOMENTE ADMIN -->
-        @if (tipoUsuario === 'Administrador') {
+        @if (podeVerExames()) {
 
           <button
-            (click)="abrirUsuarios()">
-
-            👤
+            type="button"
+            (click)="abrirExames()"
+          >
 
             <span>
-
-              <b>
-                Usuários
-              </b>
-
-              <small>
-                Gerenciar acessos
-              </small>
-
+              🧪
             </span>
 
-            →
+            <div>
+
+              <strong>
+                Novo exame
+              </strong>
+
+              <small>
+                Cadastrar exame
+              </small>
+
+            </div>
+
+          </button>
+
+        }
+
+
+        <!-- RELATÓRIOS -->
+
+        @if (podeVerRelatorios()) {
+
+          <button
+            type="button"
+            (click)="abrirRelatorios()"
+          >
+
+            <span>
+              📊
+            </span>
+
+            <div>
+
+              <strong>
+                Relatórios
+              </strong>
+
+              <small>
+                Ver indicadores
+              </small>
+
+            </div>
 
           </button>
 
         }
 
       </div>
+
+
+      <!-- STATUS DO SISTEMA -->
+
+      <div class="system-info">
+
+        <div>
+
+          <strong>
+            Sistema São Lucas
+          </strong>
+
+          <span>
+            Gestão hospitalar integrada
+          </span>
+
+        </div>
+
+        <span class="system-status">
+          ● Sistema operacional
+        </span>
+
+      </div>
+
 
     </section>
 

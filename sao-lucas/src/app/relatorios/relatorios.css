@@ -1,0 +1,333 @@
+.relatorios {
+  min-height: 100vh;
+  background: #f4f7fb;
+  padding: 30px;
+  color: #26384a;
+}
+
+header {
+  max-width: 1150px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  color: #8492a0;
+  margin-top: 5px;
+}
+
+header button {
+  border: 0;
+  padding: 11px 18px;
+  border-radius: 8px;
+  background: white;
+  color: #1769aa;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 3px 10px #00000010;
+  transition: 0.25s;
+}
+
+header button:hover {
+  background: #1769aa;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px #1769aa35;
+}
+
+.cards,
+.area,
+.resumo,
+.painel {
+  max-width: 1150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.card,
+.grafico,
+.ocupacao,
+.painel,
+.resumo > div {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #0000000d;
+}
+
+.card {
+  padding: 20px;
+  transition: 0.25s;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px #00000018;
+}
+
+.card span,
+.card small {
+  display: block;
+  color: #7d8b98;
+}
+
+.card strong {
+  display: block;
+  font-size: 28px;
+  margin: 8px 0;
+}
+
+
+/* GRÁFICO */
+
+.area {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.grafico,
+.ocupacao,
+.painel {
+  padding: 25px;
+  transition: 0.25s;
+}
+
+.grafico:hover,
+.ocupacao:hover,
+.painel:hover {
+  box-shadow: 0 8px 25px #00000012;
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.grafico p,
+.ocupacao p,
+.painel > p {
+  color: #8a97a3;
+  font-size: 13px;
+}
+
+
+/* BARRAS */
+
+.barra {
+  margin-top: 25px;
+}
+
+.barra label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.barra label b {
+  font-size: 14px;
+}
+
+.barra > div {
+  height: 12px;
+  background: #edf1f5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.barra span {
+  display: block;
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.8s ease;
+}
+
+.azul {
+  background: #3182ce;
+}
+
+.verde {
+  background: #38a169;
+}
+
+.vermelho {
+  background: #e05252;
+}
+
+.barra:hover span {
+  filter: brightness(1.1);
+}
+
+
+/* OCUPAÇÃO */
+
+.circulo {
+  width: 145px;
+  height: 145px;
+  margin: 25px auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    #1769aa var(--ocupacao),
+    #e8edf2 var(--ocupacao)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.circulo:hover {
+  transform: scale(1.05);
+}
+
+.circulo strong {
+  font-size: 27px;
+}
+
+.circulo small {
+  color: #8996a2;
+}
+
+.leitos {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.leitos p {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* INTERNAÇÕES */
+
+.painel {
+  margin-top: 18px;
+}
+
+.status {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.status-card {
+  padding: 20px;
+  border-radius: 10px;
+  transition: 0.25s;
+  cursor: default;
+}
+
+.status-card:hover {
+  transform: translateY(-3px);
+}
+
+.status-card strong {
+  display: block;
+  font-size: 25px;
+}
+
+.status-card span {
+  color: #697784;
+}
+
+.verde-fundo {
+  background: #e7f7ee;
+}
+
+.amarelo-fundo {
+  background: #fff5df;
+}
+
+.vermelho-fundo {
+  background: #ffe8e8;
+}
+
+
+/* RESUMO */
+
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.resumo > div {
+  padding: 20px;
+  font-size: 20px;
+  transition: 0.25s;
+}
+
+.resumo > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px #00000015;
+}
+
+.resumo span {
+  display: block;
+  color: #8492a0;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.resumo strong {
+  display: block;
+  font-size: 25px;
+  margin-top: 5px;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 800px) {
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .area {
+    grid-template-columns: 1fr;
+  }
+
+  .status,
+  .resumo {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .relatorios {
+    padding: 15px;
+  }
+
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+}

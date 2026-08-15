@@ -1,59 +1,81 @@
-# SaoLucas
+# 🏥 São Lucas Hospital
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.4.
+O São Lucas Hospital é um sistema web desenvolvido para facilitar o gerenciamento de informações de um hospital.
 
-## Development server
+A ideia é reunir em um só lugar informações sobre pacientes, médicos, consultas, internações e exames, facilitando o trabalho da equipe e a organização do hospital.
 
-To start a local development server, run:
+## 🎯 Objetivo
 
-```bash
-ng serve
-```
+O sistema foi criado para ajudar hospitais a organizar melhor seus dados e processos do dia a dia.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Com ele é possível:
 
-## Code scaffolding
+- Cadastrar e consultar pacientes;
+- Cadastrar médicos;
+- Agendar consultas;
+- Controlar internações;
+- Cadastrar e acompanhar exames;
+- Acompanhar a ocupação dos leitos;
+- Visualizar relatórios e indicadores;
+- Gerenciar diferentes tipos de usuários.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 👥 Usuários
 
-```bash
-ng generate component component-name
-```
+O sistema possui três tipos de usuários:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Administrador:** possui acesso completo ao sistema.
 
-```bash
-ng generate --help
-```
+**Médico:** possui acesso às áreas relacionadas aos pacientes, consultas, internações, exames e relatórios.
 
-## Building
+**Recepcionista:** possui acesso principalmente a pacientes, consultas e internações.
 
-To build the project run:
+## 🔐 Acesso para demonstração
 
-```bash
-ng build
-```
+**Administrador**
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+E-mail: `admin@gmail.com`  
+Senha: `admin123`
 
-## Running unit tests
+## 💾 Armazenamento
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Os dados são armazenados utilizando `localStorage`, permitindo que os cadastros continuem disponíveis mesmo após atualizar a página.
 
-```bash
-ng test
-```
+## 📊 Dashboard
 
-## Running end-to-end tests
+O dashboard apresenta informações importantes do hospital, como:
 
-For end-to-end (e2e) testing, run:
+- Pacientes;
+- Médicos;
+- Consultas;
+- Internações;
+- Exames;
+- Exames pendentes;
+- Leitos ocupados;
+- Leitos disponíveis;
+- Ocupação hospitalar.
 
-```bash
-ng e2e
-```
+Também possui relatórios e indicadores para facilitar a análise das informações.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🛠️ Tecnologias
 
-## Additional Resources
+- Angular
+- TypeScript
+- HTML
+- CSS
+- Bootstrap
+- LocalStorage
+- GitHub
+- Netlify
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🌐 Links
+
+**Aplicação:** coloque aqui o link do Netlify.
+
+**GitHub:**  
+https://github.com/pedrousers123/S-o-Lucas-Hospital
+
+## 👨‍💻 Desenvolvedor
+
+Pedro Lucas Almeida Vargas
+
+Projeto desenvolvido para a Avaliação Parcial 2 de Desenvolvimento Web.
